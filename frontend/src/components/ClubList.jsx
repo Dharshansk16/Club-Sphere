@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import CustomCard from "./CustomCard";
+import { Container, Row, Col } from "react-bootstrap";
 
 const ClubList = () => {
   const [clubs, setClubs] = useState([]);
@@ -18,18 +20,19 @@ const ClubList = () => {
       });
   }, []);
   return (
-    <div className="container mx-auto">
-      <h1 className="text-2xl font-bold">College Clubs</h1>
-      <ul>
-        {clubs.map((club) => (
-          <li key={club.id} className="p-4 border-b border-gray-200">
-            <h2 className="text-xl">{club.name}</h2>
-            <p>{club.description}</p>
-            <img src={club.avatar} />
-          </li>
+    <Container className="mt-16">
+      <Row xs={1} md={2} lg={3} className="g-4">
+        {clubs.map((club, index) => (
+          <Col key={index}>
+            <CustomCard
+              avatar={club.avatar}
+              title={club.name}
+              description={club.description}
+            />
+          </Col>
         ))}
-      </ul>
-    </div>
+      </Row>
+    </Container>
   );
 };
 
