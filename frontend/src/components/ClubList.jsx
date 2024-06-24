@@ -25,6 +25,7 @@ const ClubList = () => {
         {clubs.map((club, index) => (
           <Col key={index}>
             <CustomCard
+              slug={club.slug}
               avatar={club.avatar}
               title={club.name}
               description={club.description}

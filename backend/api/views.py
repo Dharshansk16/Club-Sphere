@@ -8,6 +8,7 @@ from .models import Club , Event
 class ClubViewSet(viewsets.ModelViewSet):
     queryset = Club.objects.all()
     serializer_class = ClubSerializer
+    lookup_field="slug"
 
 
 class EventViewSet(viewsets.ModelViewSet):

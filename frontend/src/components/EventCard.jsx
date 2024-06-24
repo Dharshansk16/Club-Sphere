@@ -1,0 +1,75 @@
+import Button from "react-bootstrap/Button";
+import Card from "react-bootstrap/Card";
+import React from "react";
+import { Zoom } from "@mui/material";
+import { Link } from "react-router-dom";
+
+function EventCard(props) {
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const formattedDate = `${date.toLocaleDateString()}`;
+    const formattedTime = `${date.toLocaleTimeString()}`;
+    return { formattedDate, formattedTime };
+  };
+
+  const { formattedDate, formattedTime } = formatDate(props.date);
+  return (
+    <Link to={`/clubs/${props.slug}/`} className="no-underline">
+      <Card
+        style={{
+          background: "#333",
+          color: "#fff",
+          height: "400px",
+          width: "18rem",
+          maxHeight: "400px",
+        }}
+        className="rounded mb-4 transition duration-300 ease-in-out transform hover:scale-105"
+      >
+        <Zoom in={true} timeout={900}>
+          <div className="relative h-1/2 bg-black">
+            <img
+              src={props.image}
+              alt="Card Image"
+              className="w-full h-full object-contain"
+            />
+          </div>
+        </Zoom>
+        <Zoom in={true} timeout={900}>
+          <Card.Body className="flex flex-col justify-between h-1/2 p-4">
+            <div>
+              <Card.Title>
+                <span className="bg-clip-text text-xl font-bold text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ...">
+                  {props.name}
+                </span>
+              </Card.Title>
+              <Card.Text className="text-gray-400">
+                {props.description.length > 100
+                  ? `${props.description.substring()}`
+                  : props.description}
+              </Card.Text>
+            </div>
+            <div className="flex justify-between mt-4 font-serif">
+              <div className="text-sm">
+                <Card.Text className="text-sm text-blue-400">
+                  Venue: {props.venue} <br />
+                  {props.clubname}
+                </Card.Text>
+              </div>
+              <div className="text-right">
+                <Card.Text className="text-sm">
+                  <span className="text-blue-400">Date: </span>
+                  <span className="text-purple-400">{formattedDate}</span>{" "}
+                  <br />
+                  <span className="text-blue-400">Time: </span>
+                  <span className="text-purple-400">{formattedTime} </span>
+                </Card.Text>
+              </div>
+            </div>
+          </Card.Body>
+        </Zoom>
+      </Card>
+    </Link>
+  );
+}
+
+export default EventCard;

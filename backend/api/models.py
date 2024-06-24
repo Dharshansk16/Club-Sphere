@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.text import slugify
 
 #Club 
 class Club(models.Model):
@@ -6,7 +7,12 @@ class Club(models.Model):
     description = models.TextField()
     url = models.URLField()
     avatar = models.ImageField(upload_to="club_images/", null=True, blank = True)
+    slug = models.SlugField(unique=True , default='', blank=True)
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)  # Generate slug from name
+        super(Club, self).save(*args, **kwargs)
+    
     def __str__(self):
         return self.name
 
@@ -17,11 +23,10 @@ class Event(models.Model):
     name = models.CharField(max_length=200)
     description = models.TextField() 
     date = models.DateTimeField()
+    venue = models.CharField(max_length=100 ,null=True)
 
     class Meta:
         ordering = ["-date"]
-
-
     def __str__(self):
         return f"{self.club} | {self.name}"
     
