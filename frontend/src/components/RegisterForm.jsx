@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
+import Form from "./Form";
+import { useNavigate } from "react-router-dom";
 
 function RegisterForm() {
   const [clubdetails, setClubDetails] = useState({
@@ -8,8 +10,12 @@ function RegisterForm() {
     description: "",
     avatar: "",
     url: "",
+    password: "",
+    confirmPassword: "",
   });
   const [image, setImage] = useState(null);
+  const [errorText, setErrorText] = useState("");
+  const navigate = useNavigate();
 
   function handleImageChange(event) {
     setImage(event.target.files[0]);
@@ -26,11 +32,16 @@ function RegisterForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if (clubdetails.password !== clubdetails.confirmPassword) {
+      setErrorText("Passwords do not match!");
+      return;
+    }
     const formData = new FormData();
     formData.append("name", clubdetails.name);
     formData.append("description", clubdetails.description);
     formData.append("url", clubdetails.url);
     formData.append("slug", "w");
+    formData.append("password", clubdetails.password);
     if (image) {
       formData.append("avatar", image);
     }
@@ -44,61 +55,27 @@ function RegisterForm() {
       })
       .then((response) => {
         console.log("Club created successfully:", response.data);
+        navigate("/");
       })
       .catch((error) => {
         console.error("There was an error creating the club!", error);
+        setErrorText("There was an error creating the club. Please try again.");
       });
   };
 
   return (
-    <div className="container mx-auto">
-      <h1 className="text-2xl font-bold">Create a New Club</h1>
-      <form onSubmit={handleSubmit} className="mt-4">
-        <div className="mb-4">
-          <label className="block text-gray-700">Club Name</label>
-          <input
-            name="name"
-            type="text"
-            value={clubdetails.name}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded mt-1"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Description</label>
-          <textarea
-            name="description"
-            value={clubdetails.description}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded mt-1"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Url</label>
-          <input
-            name="url"
-            type="url"
-            value={clubdetails.url}
-            onChange={handleChange}
-            className="w-full p-2 border border-gray-300 rounded mt-1"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-700">Image</label>
-          <input
-            type="file"
-            onChange={handleImageChange}
-            className="w-full p-2 border border-gray-300 rounded mt-1"
-          />
-        </div>
-
-        <button type="submit" className="bg-blue-500 text-white p-2 rounded">
-          Create Club
-        </button>
-      </form>
+    <div>
+      <Form
+        callHandleChange={handleChange}
+        callHandleSubmit={handleSubmit}
+        callImageChange={handleImageChange}
+        name={clubdetails.name}
+        description={clubdetails.description}
+        url={clubdetails.url}
+        password={clubdetails.password}
+        passwordConfirm={clubdetails.confirmPassword}
+        errortext={errorText}
+      />
     </div>
   );
 }

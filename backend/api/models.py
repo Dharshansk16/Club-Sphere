@@ -8,6 +8,7 @@ class Club(models.Model):
     url = models.URLField()
     avatar = models.ImageField(upload_to="club_images/", null=True, blank = True)
     slug = models.SlugField(unique=True , default='', blank=True)
+    password = models.CharField(max_length=50,default="")
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)  # Generate slug from name

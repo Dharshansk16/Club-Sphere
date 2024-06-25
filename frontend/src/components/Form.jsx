@@ -1,92 +1,88 @@
 import React from "react";
 
-function Form() {
+function Form(props) {
   return (
-    <div className="w-full max-w-xs ">
-      <form
-        onSubmit={handleSubmit}
-        className=" shadow-md rounded-xl  px-8 pt-6 pb-8 mb-4 bg-gradient-to-r from-slate-800 to-gray-900"
-      >
-        <h2 className=" text-center text-4xl font-bold text-gray-900 leading-tight mb-2 pb-4 relative">
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-pink-500">
-            {name}
-          </span>
-          <span className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-purple-500 to-pink-500 "></span>
-        </h2>
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-md font-bold mb-2 pt-2"
-            for="username"
-          >
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-pink-500">
-              Username
-            </span>
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-400 leading-tight focus:outline-none focus:shadow-outline bg-gradient-to-r from-slate-600 to-gray-600"
-            id="username"
-            type="text"
-            placeholder="Username"
-            onChange={handleChange}
-            value={username}
-          />
-        </div>
-        <div className="mb-6">
-          <label
-            className="block text-gray-700 text-md font-bold mb-2"
-            for="password"
-          >
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-500 to-pink-500">
-              Password
-            </span>
-          </label>
-          <input
-            className="shadow appearance-none border border-red-500 rounded w-full py-2 px-3 text-gray-400 mb-3 leading-tight focus:outline-none focus:shadow-outline bg-gradient-to-r from-slate-600 to-gray-600"
-            id="password"
-            type="password"
-            placeholder="******************"
-            value={password}
-            onChange={(event) => {
-              const newpassword = event.target.value;
-              setPassword(newpassword);
-            }}
-          />
-          <p
-            className="text-red-500 text-xs italic"
-            style={{ visibility: ishidden }}
-          >
-            Please choose a password.
-          </p>
-        </div>
-        <div className="flex items-center justify-between">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full transition transform hover:scale-105 duration-300 ease-in-out">
+        <h1 className="text-2xl font-bold mb-4">Register</h1>
+        <form onSubmit={props.callHandleSubmit} className="mt-4">
+          <div className="mb-2">
+            <label className="block text-gray-700">Club Name</label>
+            <input
+              name="name"
+              type="text"
+              value={props.name}
+              onChange={props.callHandleChange}
+              className="w-full p-2 border border-gray-300 rounded mt-1 transition transform hover:scale-105 duration-300 ease-in-out"
+              required
+            />
+          </div>
+          <div className="mb-2">
+            <label className="block text-gray-700">Description</label>
+            <textarea
+              name="description"
+              value={props.description}
+              onChange={props.callHandleChange}
+              className="w-full p-2 border border-gray-300 rounded mt-1 transition transform hover:scale-105 duration-300 ease-in-out"
+              required
+            />
+          </div>
+          <div className="mb-2">
+            <label className="block text-gray-700">Url</label>
+            <input
+              name="url"
+              type="url"
+              value={props.url}
+              onChange={props.callHandleChange}
+              className="w-full p-2 border border-gray-300 rounded mt-1 transition transform hover:scale-105 duration-300 ease-in-out"
+              required
+            />
+          </div>
+          <div className="mb-2">
+            <label className="block text-gray-700">Image</label>
+            <input
+              type="file"
+              onChange={props.callImageChange}
+              className="w-full p-2 border border-gray-300 rounded mt-1 transition transform hover:scale-105 duration-300 ease-in-out"
+            />
+          </div>
+          <div className="mb-2">
+            <label className="block text-gray-700">Password</label>
+            <input
+              name="password"
+              type="password"
+              value={props.password}
+              onChange={props.callHandleChange}
+              className="w-full p-2 border border-gray-300 rounded mt-1 transition transform hover:scale-105 duration-300 ease-in-out"
+              required
+            />
+          </div>
+          <div className="mb-2">
+            <label className="block text-gray-700">Confirm Password</label>
+            <input
+              name="confirmPassword"
+              type="password"
+              value={props.confirmPassword}
+              onChange={props.callHandleChange}
+              className="w-full p-2 border border-gray-300 rounded mt-1 transition transform hover:scale-105 duration-300 ease-in-out"
+              required
+            />
+            {props.errortext && (
+              <p className="error-message text-xs text-red-600">
+                {props.errortext}
+              </p>
+            )}
+          </div>
           <button
-            className="bg-gradient-to-r from-pink-500 hover:to-yellow-500  hover: from-green-400 to-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
             type="submit"
-            onClick={() => {
-              if (password === "") {
-                setHidden("visible");
-              }
-            }}
+            className="bg-blue-500 text-white p-2 rounded w-full transition transform hover:scale-105 duration-300 ease-in-out"
           >
-            {name}
+            Register
           </button>
-          {method === "register" ? (
-            <p className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">
-              <Link to="/login">Already Signed In?</Link>
-            </p>
-          ) : (
-            <p className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800">
-              <Link to="/register">Register</Link>
-            </p>
-          )}
-        </div>
-      </form>
-      <p
-        className="text-center  text-gray-500 text-xs"
-        style={{ fontFamily: "sans-serif" }}
-      >
-        copyright &copy; 2024
-      </p>
+        </form>
+      </div>
     </div>
   );
 }
+
+export default Form;

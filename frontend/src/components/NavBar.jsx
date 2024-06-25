@@ -38,6 +38,13 @@ const NavBar = () => {
                 </span>
               </Link>
             </Nav.Link>
+            <Nav.Link className="transition duration-400 ease-in-out transform hover:scale-110">
+              <Link to={"/clubs/register"} className="no-underline">
+                <span className="bg-clip-text text-xl font-bold text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500">
+                  Register
+                </span>
+              </Link>
+            </Nav.Link>
           </Nav>
           <div className="d-flex align-items-center">
             <FormControl
