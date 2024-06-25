@@ -15,12 +15,13 @@ class Club(models.Model):
     
     def __str__(self):
         return self.name
-
+    
 #Events
 class Event(models.Model):
     club = models.ForeignKey(Club , related_name="events", on_delete=models.CASCADE) 
     img = models.ImageField(upload_to="event_images/", null=True , blank=True)
     name = models.CharField(max_length=200)
+    link = models.URLField(null=True ,blank = True)    
     description = models.TextField() 
     date = models.DateTimeField()
     venue = models.CharField(max_length=100 ,null=True)

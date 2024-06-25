@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import ProfileCard from "./ProfileCard";
+import EventDetailSection from "./EventDetailSection.jsx";
 
 const ClubDetail = () => {
   const { slug } = useParams();
@@ -33,20 +34,26 @@ const ClubDetail = () => {
         avatar={club.avatar}
         url={club.url}
       />
-      <ul>
-        {club.events.map((event) => (
-          <li key={event.id} className="p-4 border-b border-gray-200">
-            <h3 className="text-lg">{event.name}</h3>
-            <img
-              src={event.img}
-              className="w-64 h-64 object-contain bg-inherit"
+      <div className="container mx-auto p-4">
+        <h1 className="text-3xl font-bold mb-8 text-center">
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ...">
+            Upcoming Events
+          </span>
+        </h1>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 ">
+          {club.events.map((event) => (
+            <EventDetailSection
+              id={event.id}
+              title={event.name}
+              description={event.description}
+              img={event.img}
+              link={event.link}
+              venue={event.venue}
+              date={event.date}
             />
-            <p>{event.description}</p>
-            <p>Date: {event.date}</p>
-            <p>Venue: {event.venue}</p>
-          </li>
-        ))}
-      </ul>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

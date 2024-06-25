@@ -13,8 +13,9 @@ function CustomCard(props) {
           color: "#fff",
           height: "225px",
           maxWidth: "400px",
+          borderRadius: "15px",
         }}
-        className="mb-4 transition duration-300 ease-in-out transform hover:scale-105"
+        className="mb-4   transition duration-300 ease-in-out transform hover:scale-105  hover:border-2 hover:border-purple-400"
       >
         <Zoom in={true} timeout={900}>
           <Card.Body className="d-flex">
@@ -22,7 +23,7 @@ function CustomCard(props) {
               <img
                 src={props.avatar}
                 alt="Profile"
-                className="rounded-circle"
+                className="rounded-circle transition-transform duration-300 hover:scale-110"
                 style={{
                   width: "80px",
                   height: "80px",
@@ -34,7 +35,7 @@ function CustomCard(props) {
             <div className="d-flex flex-column w-100">
               <div className="mb-auto">
                 <Card.Title style={{ margin: "10px 0 10px 0" }}>
-                  <span className="bg-clip-text text-xl font-bold text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ...">
+                  <span className="bg-clip-text text-xl font-bold  text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ">
                     {props.title}
                   </span>
                 </Card.Title>
@@ -42,7 +43,7 @@ function CustomCard(props) {
                   {props.description.length > 100
                     ? `${props.description.substring(0, 100)}...`
                     : props.description}
-                  <Link to={`/clubs/${props.slug}`}>read more</Link>
+                  <Link to={`/clubs/${props.slug}`}> read more</Link>
                 </Card.Text>
               </div>
 

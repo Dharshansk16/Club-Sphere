@@ -14,7 +14,7 @@ function EventCard(props) {
 
   const { formattedDate, formattedTime } = formatDate(props.date);
   return (
-    <Link to={`/clubs/${props.slug}/`} className="no-underline">
+    <Link to={`/clubs/${props.slug}`} className="no-underline">
       <Card
         style={{
           background: "#333",
@@ -22,8 +22,9 @@ function EventCard(props) {
           height: "400px",
           width: "18rem",
           maxHeight: "400px",
+          borderRadius: "10px",
         }}
-        className="rounded mb-4 transition duration-300 ease-in-out transform hover:scale-105"
+        className="mb-4 transition duration-300 ease-in-out transform hover:scale-105  hover:border-2 hover:border-purple-400"
       >
         <Zoom in={true} timeout={900}>
           <div className="relative h-1/2 bg-black">
@@ -42,10 +43,15 @@ function EventCard(props) {
                   {props.name}
                 </span>
               </Card.Title>
-              <Card.Text className="text-gray-400">
-                {props.description.length > 100
-                  ? `${props.description.substring()}`
+              <Card.Text className="text-gray-400 text-sm">
+                {props.description.length > 80
+                  ? `${props.description.substring(0, 80)}`
                   : props.description}
+                {props.description.length > 80 ? (
+                  <Link to={`/clubs/${props.slug}`}> read more...</Link>
+                ) : (
+                  ""
+                )}
               </Card.Text>
             </div>
             <div className="flex justify-between mt-4 font-serif">

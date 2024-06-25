@@ -35,6 +35,7 @@ const EventList = () => {
             date={event.date}
             venue={event.venue}
             slug={event.club.slug}
+            id={event.id}
           />
         </div>
       ))}
