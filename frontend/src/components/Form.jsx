@@ -5,8 +5,9 @@ function Form(props) {
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full transition transform hover:scale-105 duration-300 ease-in-out">
         <h1 className="text-2xl font-bold mb-4">Register</h1>
+        <p className="error message text-sm text-red-600">{props.errorText}</p>
         <form onSubmit={props.callHandleSubmit} className="mt-4">
-          <div className="mb-2">
+          <div className="mb-4">
             <label className="block text-gray-700">Club Name</label>
             <input
               name="name"
@@ -17,7 +18,7 @@ function Form(props) {
               required
             />
           </div>
-          <div className="mb-2">
+          <div className="mb-4">
             <label className="block text-gray-700">Description</label>
             <textarea
               name="description"
@@ -27,7 +28,7 @@ function Form(props) {
               required
             />
           </div>
-          <div className="mb-2">
+          <div className="mb-4">
             <label className="block text-gray-700">Url</label>
             <input
               name="url"
@@ -38,40 +39,13 @@ function Form(props) {
               required
             />
           </div>
-          <div className="mb-2">
+          <div className="mb-4">
             <label className="block text-gray-700">Image</label>
             <input
               type="file"
               onChange={props.callImageChange}
               className="w-full p-2 border border-gray-300 rounded mt-1 transition transform hover:scale-105 duration-300 ease-in-out"
             />
-          </div>
-          <div className="mb-2">
-            <label className="block text-gray-700">Password</label>
-            <input
-              name="password"
-              type="password"
-              value={props.password}
-              onChange={props.callHandleChange}
-              className="w-full p-2 border border-gray-300 rounded mt-1 transition transform hover:scale-105 duration-300 ease-in-out"
-              required
-            />
-          </div>
-          <div className="mb-2">
-            <label className="block text-gray-700">Confirm Password</label>
-            <input
-              name="confirmPassword"
-              type="password"
-              value={props.confirmPassword}
-              onChange={props.callHandleChange}
-              className="w-full p-2 border border-gray-300 rounded mt-1 transition transform hover:scale-105 duration-300 ease-in-out"
-              required
-            />
-            {props.errortext && (
-              <p className="error-message text-xs text-red-600">
-                {props.errortext}
-              </p>
-            )}
           </div>
           <button
             type="submit"

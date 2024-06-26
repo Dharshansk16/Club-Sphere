@@ -42,8 +42,20 @@ INSTALLED_APPS = [
     #new
     "api", 
     "rest_framework",
+    'rest_framework_simplejwt.token_blacklist',
     "corsheaders",
 ]
+#New
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        # Add other authentication classes as needed
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+        # Restrict to authenticated users by default
+    ),
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -54,9 +66,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     "corsheaders.middleware.CorsMiddleware",#new
+    'django.middleware.common.CommonMiddleware',#new
 
 ]
-REST_FRAMEWORK = {"DEFAULT_PERMISSION_CLASSES":['rest_framework.permissions.AllowAny']}
+
 CORS_ORIGIN_ALLOW_ALL = True #new
 
 

@@ -8,8 +8,8 @@ const ClubList = () => {
 
   useEffect(() => {
     const apiUrl = import.meta.env.VITE_API_URL; // Access the Vite environment variable
-
     axios
+
       .get(`${apiUrl}/clubs/`)
       .then((response) => {
         console.log("Fetched Data: ", response.data);

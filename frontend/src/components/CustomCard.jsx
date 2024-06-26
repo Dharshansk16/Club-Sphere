@@ -40,8 +40,8 @@ function CustomCard(props) {
                   </span>
                 </Card.Title>
                 <Card.Text className="text-gray-400">
-                  {props.description.length > 100
-                    ? `${props.description.substring(0, 100)}...`
+                  {props.description.length > 150
+                    ? `${props.description.substring(0, 150)}...`
                     : props.description}
                   <Link to={`/clubs/${props.slug}`}> read more</Link>
                 </Card.Text>

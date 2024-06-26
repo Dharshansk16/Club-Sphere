@@ -8,6 +8,7 @@ class NestedEventSerializer(serializers.ModelSerializer):
 
 class ClubSerializer(serializers.ModelSerializer):
     events = NestedEventSerializer(many=True, read_only=True)
+    created_by = serializers.ReadOnlyField(source='created_by.username')
 
     class Meta:
         model = Club

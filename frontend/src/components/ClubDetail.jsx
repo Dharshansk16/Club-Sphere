@@ -41,8 +41,9 @@ const ClubDetail = () => {
           </span>
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 ">
-          {club.events.map((event) => (
+          {club.events.map((event, index) => (
             <EventDetailSection
+              key={index}
               id={event.id}
               title={event.name}
               description={event.description}
