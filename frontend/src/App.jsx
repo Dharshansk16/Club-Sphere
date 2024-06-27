@@ -11,6 +11,7 @@ import Profile from "./pages/Profile";
 import Event from "./pages/Events";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
+import { AuthProvider } from "./AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Update from "./pages/Update";
 
@@ -21,24 +22,35 @@ function App() {
   }
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/logout" element={<Logout />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/clubs/:slug" element={<Profile />} />
-        <Route path="/events" element={<Event />} />
-        <Route
-          path="/clubs/register/"
-          element={
-            <ProtectedRoute>
-              <Register />
-            </ProtectedRoute>
-          }
-        />
-        <Route path="/clubs/update/:slug" element={<Update />} />
-      </Routes>
-    </Router>
+    <AuthProvider>
+      {" "}
+      {/* Wrap your app with AuthProvider */}
+      <Router>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<Logout />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/clubs/:slug" element={<Profile />} />
+          <Route path="/events" element={<Event />} />
+          <Route
+            path="/clubs/register"
+            element={
+              <ProtectedRoute>
+                <Register />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/clubs/update/:slug"
+            element={
+              <ProtectedRoute>
+                <Update />
+              </ProtectedRoute>
+            }
+          />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 

@@ -4,8 +4,10 @@ import Grow from "@mui/material/Grow";
 import EditIcon from "@mui/icons-material/Edit";
 import LinkIcon from "@mui/icons-material/Link";
 import { Link } from "react-router-dom";
+import { useAuth } from "../AuthContext";
 
 const ProfileCard = (props) => {
+  const { username } = useAuth();
   return (
     <Container className="my-5">
       <Row className="justify-content-center">
@@ -30,6 +32,7 @@ const ProfileCard = (props) => {
                         marginTop: "10px",
                       }}
                     />
+
                     <Link to={props.url}>
                       <LinkIcon
                         style={{ fontSize: "25px", margin: "5px 20px 0  0" }}
@@ -43,8 +46,9 @@ const ProfileCard = (props) => {
                           {props.name}
                         </span>
                       </h2>
-
-                      <EditIcon className="mx-16" />
+                      <Link to={`/clubs/update/${props.slug}`}>
+                        <EditIcon className="mx-16" />
+                      </Link>
                     </div>
                     {/* <div className="d-flex mb-4">
                     <div className="me-4">

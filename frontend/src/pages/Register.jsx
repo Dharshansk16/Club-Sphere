@@ -1,7 +1,7 @@
-import RegisterForm from "../components/RegisterForm";
+import RegisterClub from "../components/RegisterClub";
 
 function Register() {
-  return <RegisterForm />;
+  return <RegisterClub />;
 }
 
 export default Register;

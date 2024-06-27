@@ -1,7 +1,7 @@
-import UpdateForm from "../components/UpdateForm";
+import UpdateClub from "../components/UpdateClub";
 
 function Update() {
-  return <UpdateForm />;
+  return <UpdateClub />;
 }
 
 export default Update;

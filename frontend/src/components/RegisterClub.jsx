@@ -5,7 +5,7 @@ import Form from "./Form";
 import { useNavigate } from "react-router-dom";
 import api from "../api";
 
-function RegisterForm() {
+function RegisterClub() {
   const [clubdetails, setClubDetails] = useState({
     name: "",
     description: "",
@@ -68,8 +68,11 @@ function RegisterForm() {
         description={clubdetails.description}
         url={clubdetails.url}
         errorText={errorText}
+        buttonName="Register"
+        formName="Register"
+        avatar={clubdetails.avatar}
       />
     </div>
   );
 }
-export default RegisterForm;
+export default RegisterClub;
