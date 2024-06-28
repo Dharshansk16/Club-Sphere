@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../AuthContext";
 
 const ProfileCard = (props) => {
-  const { username } = useAuth();
+  const { user } = useAuth();
   return (
     <Container className="my-5">
       <Row className="justify-content-center">
@@ -46,9 +46,12 @@ const ProfileCard = (props) => {
                           {props.name}
                         </span>
                       </h2>
-                      <Link to={`/clubs/update/${props.slug}`}>
-                        <EditIcon className="mx-16" />
-                      </Link>
+
+                      {user.username === props.owner && (
+                        <Link to={`/clubs/update/${props.slug}`}>
+                          <EditIcon className="mx-16" />
+                        </Link>
+                      )}
                     </div>
                     {/* <div className="d-flex mb-4">
                     <div className="me-4">

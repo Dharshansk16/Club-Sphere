@@ -3,6 +3,7 @@ from django.utils.text import slugify
 from django.contrib.auth.models import User
 from django.utils import timezone
 
+
 #Club 
 class Club(models.Model):
     name = models.CharField(max_length=100)
@@ -11,7 +12,7 @@ class Club(models.Model):
     avatar = models.ImageField(upload_to="club_images/", null=True, blank = True)
     slug = models.SlugField(unique=True , default='', blank=True)
     password = models.CharField(max_length=50,default="")
-    created_by = models.OneToOneField(User, related_name="clubs", on_delete=models.CASCADE, default="")
+    created_by = models.OneToOneField(User, related_name="club", on_delete=models.CASCADE, default="")
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)  # Generate slug from name

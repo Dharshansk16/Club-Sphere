@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     "rest_framework",
     'rest_framework_simplejwt.token_blacklist',
     "corsheaders",
+    'rest_framework.authtoken',
+
 ]
 #New
 REST_FRAMEWORK = {
@@ -56,6 +58,21 @@ REST_FRAMEWORK = {
         # Restrict to authenticated users by default
     ),
 }
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'USER_ID_FIELD': 'username',  # Configure the user identifier field (default is 'id')
+    'USER_ID_CLAIM': 'username',  # Configure the claim name that will store the user identifier
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': True,
+}
+
+
+
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

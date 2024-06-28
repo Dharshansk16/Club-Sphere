@@ -8,12 +8,13 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [authState, setAuthState] = useState({
     isAuthorized: null,
-    username: null,
+    user: null,
   });
+
   const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    auth().catch(() => setAuthState({ isAuthorized: false, username: null }));
+    auth().catch(() => setAuthState({ isAuthorized: false, user: null }));
   }, []);
 
   const refreshToken = async () => {
@@ -25,14 +26,33 @@ export const AuthProvider = ({ children }) => {
       if (res.status === 200) {
         const accessToken = res.data.access;
         localStorage.setItem(ACCESS_TOKEN, accessToken);
-        const decoded = jwtDecode(accessToken);
-        setAuthState({ isAuthorized: true, username: decoded.username });
+        await fetchCurrentUser(accessToken);
       } else {
-        setAuthState({ isAuthorized: false, username: null });
+        setAuthState({ isAuthorized: false, user: null });
       }
     } catch (error) {
       console.log(error);
-      setAuthState({ isAuthorized: false, username: null });
+      setAuthState({ isAuthorized: false, user: null });
+    }
+  };
+
+  const fetchCurrentUser = async (token) => {
+    try {
+      const response = await api.get("current_user/", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setAuthState({
+        isAuthorized: true,
+        user: response.data,
+      });
+    } catch (error) {
+      console.log(error);
+      setAuthState({
+        isAuthorized: false,
+        user: null,
+      });
     }
   };
 
@@ -40,16 +60,18 @@ export const AuthProvider = ({ children }) => {
     const token = localStorage.getItem(ACCESS_TOKEN);
 
     if (!token) {
-      setAuthState({ isAuthorized: false, username: null });
+      setAuthState({ isAuthorized: false, user: null });
       return;
     }
+
     const decoded = jwtDecode(token);
     const tokenExpiration = decoded.exp;
     const now = Date.now() / 1000;
+
     if (tokenExpiration < now) {
       await refreshToken();
     } else {
-      setAuthState({ isAuthorized: true, username: decoded.username });
+      await fetchCurrentUser(token);
     }
   };
 
