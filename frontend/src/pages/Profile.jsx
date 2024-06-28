@@ -3,7 +3,7 @@ import NavBar from "../components/NavBar";
 
 function Profile() {
   return (
-    <div className=" bg-gray-950 min-h-screen text-white">
+    <div className=" bg-zinc-950 min-h-screen text-white">
       <NavBar />
       <ClubDetail />
     </div>

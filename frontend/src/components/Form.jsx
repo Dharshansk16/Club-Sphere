@@ -2,9 +2,9 @@ import React from "react";
 
 function Form(props) {
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-950">
+    <div className="flex items-center justify-center min-h-screen bg-zinc-950">
       <div
-        style={{ background: "#333" }}
+        style={{ background: "#222" }}
         className=" shadow-lg rounded-lg p-8 max-w-lg w-full transition transform hover:scale-105 duration-300 ease-in-out"
       >
         <h1 className="text-2xl font-bold mb-4">

@@ -14,7 +14,7 @@ const ProfileCard = (props) => {
         <Col md={12}>
           <Grow in={true} timeout={900}>
             <Card
-              style={{ background: "#333", color: "#fff" }}
+              style={{ background: "#222", color: "#fff" }}
               className="border-0 rounded-lg"
             >
               <Card.Body className="p-4">

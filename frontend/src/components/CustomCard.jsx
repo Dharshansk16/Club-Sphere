@@ -9,7 +9,7 @@ function CustomCard(props) {
     <Link to={`/clubs/${props.slug}/`} className="no-underline">
       <Card
         style={{
-          background: "#333",
+          background: "#222222",
           color: "#fff",
           height: "225px",
           maxWidth: "400px",

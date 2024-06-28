@@ -20,7 +20,7 @@ function EventCard(props) {
     <Link to={`/clubs/${props.slug}`} className="no-underline">
       <Card
         style={{
-          background: "#333",
+          background: "#222222",
           color: "#fff",
           height: "400px",
           width: "18rem",

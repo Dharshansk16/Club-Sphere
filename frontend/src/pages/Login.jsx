@@ -3,11 +3,21 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 import api from "../api";
+import LoginForm from "../components/LoginForm";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorText, setErrorText] = useState("");
   const navigate = useNavigate();
+
+  const handleChange = (event) => {
+    setUsername(event.target.value);
+  };
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -22,31 +32,20 @@ const Login = () => {
       })
       .catch((err) => {
         console.error("Login error:", err);
+        setErrorText("Invalid Username or Password!");
         // Handle login error (display error message, clear form fields, etc.)
       });
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <label>Username:</label>
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-        <label>Password:</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit">Login</button>
-      </form>
-    </div>
+    <LoginForm
+      name={username}
+      password={password}
+      callHandleChange={handleChange}
+      callHandlePasswordChange={handlePasswordChange}
+      callHandleSubmit={handleSubmit}
+      errorText={errorText}
+    />
   );
 };
 
