@@ -3,6 +3,7 @@ import Card from "react-bootstrap/Card";
 import React from "react";
 import { Zoom } from "@mui/material";
 import { Link } from "react-router-dom";
+import AnimatedText from "../styles/AnimatedText";
 
 function EventCard(props) {
   const formatDate = (dateString) => {
@@ -27,7 +28,7 @@ function EventCard(props) {
           maxHeight: "400px",
           borderRadius: "10px",
         }}
-        className="mb-4 transition duration-300 ease-in-out transform hover:scale-105  hover:border-2 hover:border-purple-400"
+        className="mb-4 transition duration-300 ease-in-out transform hover:scale-105  hover:border-2 hover:border-white"
       >
         <Zoom in={true} timeout={900}>
           <div className="relative h-1/2 bg-black">
@@ -42,9 +43,7 @@ function EventCard(props) {
           <Card.Body className="flex flex-col justify-between h-1/2 p-4">
             <div>
               <Card.Title>
-                <span className="bg-clip-text text-xl font-bold text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ...">
-                  {props.name}
-                </span>
+                <AnimatedText text={props.name} />
               </Card.Title>
               <Card.Text className="text-gray-400 text-sm">
                 {props.description.length > 80

@@ -1,4 +1,5 @@
 import React from "react";
+import AnimatedText from "../styles/AnimatedText";
 
 function Form(props) {
   return (
@@ -8,9 +9,7 @@ function Form(props) {
         className=" shadow-lg rounded-lg p-8 max-w-lg w-full transition transform hover:scale-105 duration-300 ease-in-out"
       >
         <h1 className="text-2xl font-bold mb-4">
-          <span className="bg-clip-text text-3xl font-bold text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ">
-            {props.formName}
-          </span>
+          <AnimatedText text={props.formName} />
         </h1>
         <p className="error message text-sm text-red-600">{props.errorText}</p>
         <form onSubmit={props.callHandleSubmit} className="mt-4">

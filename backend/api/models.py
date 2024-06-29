@@ -28,7 +28,7 @@ class Event(models.Model):
     name = models.CharField(max_length=200)
     link = models.URLField(null=True ,blank = True)    
     description = models.TextField() 
-    date = models.DateTimeField()
+    date = models.DateTimeField(null=True , blank=True)
     venue = models.CharField(max_length=100 ,null=True)
 
     class Meta:

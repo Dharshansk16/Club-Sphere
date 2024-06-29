@@ -7,6 +7,7 @@ from .models import Club, Event
 from .serializers import ClubSerializer, EventSerializer, UserSerializer
 from .permissions import IsOwnerOrReadOnly
 from rest_framework.exceptions import ValidationError  
+from django.shortcuts import get_object_or_404
 
 class ClubViewSet(viewsets.ModelViewSet):
     queryset = Club.objects.all()
@@ -22,8 +23,10 @@ class ClubViewSet(viewsets.ModelViewSet):
 class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
 
+
+  
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer

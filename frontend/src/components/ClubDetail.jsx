@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import ProfileCard from "./ProfileCard";
 import EventDetailSection from "./EventDetailSection.jsx";
+import AnimatedText from "../styles/AnimatedText.jsx";
 
 const ClubDetail = () => {
   const { slug } = useParams();
@@ -38,9 +39,7 @@ const ClubDetail = () => {
       />
       <div className="container mx-auto p-4">
         <h1 className="text-3xl font-bold mb-8 text-center">
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ...">
-            Upcoming Events
-          </span>
+          <AnimatedText text="Upcoming Events" />
         </h1>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 ">
           {club.events.map((event, index) => (

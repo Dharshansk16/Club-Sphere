@@ -1,6 +1,7 @@
 import { useState } from "react";
 import LinkIcon from "@mui/icons-material/Link";
 import { Link } from "react-router-dom";
+import AnimatedText from "../styles/AnimatedText";
 
 function EventDetailSection(props) {
   const formatDate = (dateString) => {
@@ -45,9 +46,7 @@ function EventDetailSection(props) {
       )}
       <div className="p-4 w-2/3">
         <h2 className="text-xl text-gray-400 font-bold mb-2">
-          <span className="bg-clip-text text-3xl font-bold text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ...">
-            {props.title}
-          </span>
+          <AnimatedText text={props.title} />
         </h2>
         <p className="text-gray-400 mb-4">{props.description}</p>
         <p className="text-gray-400 mb-4 text-sm">
