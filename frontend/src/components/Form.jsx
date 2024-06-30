@@ -20,7 +20,7 @@ function Form(props) {
               type="text"
               value={props.name}
               onChange={props.callHandleChange}
-              className="bg-stone-400 font-bold text-md text-stone-700 w-full p-2 border border-gray-300 rounded mt-1 transition transform hover:scale-105 duration-300 ease-in-out"
+              className="bg-stone-400 font-semibold text-md text-stone-700 w-full p-2 border border-gray-300 rounded mt-1 transition transform hover:scale-105 duration-300 ease-in-out"
               required
             />
           </div>
@@ -30,7 +30,7 @@ function Form(props) {
               name="description"
               value={props.description}
               onChange={props.callHandleChange}
-              className="bg-stone-400  font-bold text-md text-stone-700 w-full p-2 border border-gray-300 rounded mt-1 transition transform hover:scale-105 duration-300 ease-in-out"
+              className="bg-stone-400  font-semibold text-md text-stone-700 w-full p-2 border border-gray-300 rounded mt-1 transition transform hover:scale-105 duration-300 ease-in-out"
               required
             />
           </div>
@@ -41,7 +41,7 @@ function Form(props) {
               type="url"
               value={props.url}
               onChange={props.callHandleChange}
-              className="bg-stone-400  font-bold text-md text-stone-700 w-full p-2 border border-gray-300 rounded mt-1 transition transform hover:scale-105 duration-300 ease-in-out"
+              className="bg-stone-400  font-semibold text-md text-stone-700 w-full p-2 border border-gray-300 rounded mt-1 transition transform hover:scale-105 duration-300 ease-in-out"
               required
             />
           </div>

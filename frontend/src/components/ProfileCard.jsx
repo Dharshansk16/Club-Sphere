@@ -11,7 +11,7 @@ const ProfileCard = (props) => {
   const { user } = useAuth();
   return (
     <Container className="my-5">
-      <Row className="justify-content-center transition duration-900 ease-in-out hover:scale-110">
+      <Row className="justify-content-center transition duration-300 ease-in-out hover:scale-105">
         <Col md={12}>
           <Grow in={true} timeout={900}>
             <Card
@@ -75,7 +75,7 @@ const ProfileCard = (props) => {
                   </div>
                   <div className="mx-2">
                     {user.username === props.owner && (
-                      <Link to={`/clubs/update/${props.slug}`}>
+                      <Link to={"/events/add/"}>
                         <Button variant="outline-light bg-gray-500">
                           Add Event
                         </Button>

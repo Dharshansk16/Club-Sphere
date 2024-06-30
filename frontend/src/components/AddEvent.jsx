@@ -1,9 +1,12 @@
 import React, { useState } from "react";
-import api from "../api"; // Import your configured axios instance
-import { useAuth } from "../AuthContext"; // Import your AuthProvider context hook // Import your constant for access token storage
+import api from "../api";
+import { useAuth } from "../AuthContext";
+import EventForm from "./EventForm";
+import { useNavigate } from "react-router-dom";
 
-const EventForm = () => {
+const AddEvent = () => {
   const { user } = useAuth(); // Access user information from AuthProvider context
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -11,7 +14,6 @@ const EventForm = () => {
     venue: "",
     img: null, // For image upload if needed
     link: "", // URL field
-    // other fields as needed
   });
 
   const handleSubmit = async (e) => {
@@ -19,11 +21,22 @@ const EventForm = () => {
     try {
       const formDataWithClub = {
         ...formData,
-        club: user.club.id, // Assuming user context includes club information
+        club: user.club.slug,
       };
-      const response = await api.post("/events/", formDataWithClub);
+
+      const data = new FormData();
+      for (const key in formDataWithClub) {
+        data.append(key, formDataWithClub[key]);
+      }
+
+      const response = await api.post("/events/", data, {
+        headers: {
+          "Content-Type": "multipart/form-data", // Required for file uploads
+        },
+      });
+
       console.log("Event created:", response.data);
-      // Handle success or navigation
+      navigate(`/clubs/${response.data.club}/`);
     } catch (error) {
       console.error("Error creating event:", error);
       // Handle error display or other logic
@@ -39,62 +52,16 @@ const EventForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      {/* Name */}
-      <label>Name:</label>
-      <input
-        type="text"
-        name="name"
-        value={formData.name}
-        onChange={handleChange}
-        required
-      />
-
-      {/* Description */}
-      <label>Description:</label>
-      <textarea
-        name="description"
-        value={formData.description}
-        onChange={handleChange}
-        required
-      />
-
-      {/* Date */}
-      <label>Date:</label>
-      <input
-        type="date"
-        name="date"
-        value={formData.date}
-        onChange={handleChange}
-      />
-
-      {/* Venue */}
-      <label>Venue:</label>
-      <input
-        type="text"
-        name="venue"
-        value={formData.venue}
-        onChange={handleChange}
-        required
-      />
-
-      {/* Image Upload */}
-      <label>Event Image:</label>
-      <input type="file" name="img" onChange={handleChange} />
-
-      {/* Link */}
-      <label>Event Link:</label>
-      <input
-        type="url"
-        name="link"
-        value={formData.link}
-        onChange={handleChange}
-      />
-
-      {/* Submit Button */}
-      <button type="submit">Create Event</button>
-    </form>
+    <EventForm
+      name={formData.name}
+      description={formData.description}
+      link={formData.link}
+      venue={formData.venue}
+      date={formData.date}
+      callHandleChange={handleChange}
+      callHandleSubmit={handleSubmit}
+    />
   );
 };
 
-export default EventForm;
+export default AddEvent;

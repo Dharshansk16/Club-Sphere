@@ -21,7 +21,7 @@ function EventDetailSection(props) {
   return (
     <div
       style={{ background: "#222" }}
-      className="rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition duration-300  hover:border-2 hover:border-purple-400 flex"
+      className="rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition duration-300  hover:border-2 hover:border-white flex"
     >
       {showFullImage ? (
         <div

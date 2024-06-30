@@ -2,18 +2,28 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import EventCard from "./EventCard";
+import api from "../api";
 
 const EventList = () => {
   const [events, setEvent] = useState([]);
 
   useEffect(() => {
     const apiUrl = import.meta.env.VITE_API_URL;
-    axios
+    api
       .get(`${apiUrl}/events/`)
       .then((response) => {
         console.log("Fetched Data: ", response.data);
-        setEvent(response.data);
+        //Access Whole Club Details with Club_Slug
+        const eventsWithClubDetails = response.data.map(async (event) => {
+          const clubResponse = await api.get(`${apiUrl}/clubs/${event.club}/`);
+          const clubDetails = clubResponse.data;
+          return { ...event, club: clubDetails };
+        });
+        Promise.all(eventsWithClubDetails).then((eventsWithDetails) => {
+          setEvent(eventsWithDetails);
+        });
       })
+
       .catch((error) => {
         console.error("There was an error fetching the club details!", error);
       });

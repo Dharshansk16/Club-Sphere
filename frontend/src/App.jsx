@@ -14,7 +14,7 @@ import Login from "./pages/Login";
 import { AuthProvider } from "./AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Update from "./pages/Update";
-import EventForm from "./components/AddEvent";
+import AddEvent from "./components/AddEvent";
 
 function App() {
   function Logout() {
@@ -48,7 +48,7 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/events/add/" element={<EventForm />} />
+          <Route path="/events/add/" element={<AddEvent />} />
         </Routes>
       </Router>
     </AuthProvider>

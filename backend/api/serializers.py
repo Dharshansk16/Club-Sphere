@@ -16,7 +16,7 @@ class ClubSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 class EventSerializer(serializers.ModelSerializer):
-    club = ClubSerializer()
+    club = serializers.SlugRelatedField(slug_field='slug', queryset=Club.objects.all())
 
     class Meta:
         model = Event

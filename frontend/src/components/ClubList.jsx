@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import CustomCard from "./CustomCard";
 import { Container, Row, Col } from "react-bootstrap";
+import { useAuth } from "../AuthContext";
 
 const ClubList = () => {
   const [clubs, setClubs] = useState([]);
