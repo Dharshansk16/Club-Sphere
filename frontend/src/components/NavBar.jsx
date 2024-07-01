@@ -13,7 +13,7 @@ import LoginIcon from "@mui/icons-material/Login";
 import AnimatedText from "../styles/AnimatedText";
 
 const NavBar = () => {
-  const { isAuthorized, user, logout } = useAuth();
+  const { isAuthorized, user } = useAuth();
   const location = useLocation();
 
   // Hover state
