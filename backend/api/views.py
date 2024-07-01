@@ -39,7 +39,7 @@ class EventViewSet(viewsets.ModelViewSet):
         query = self.request.query_params.get('q')
         if query:
             queryset = queryset.filter(
-                Q(name__icontains=query) | Q(description__icontains=query)
+                Q(name__icontains=query) | Q(description__icontains=query) | Q(club__name__icontains=query)
             )
         return queryset
 

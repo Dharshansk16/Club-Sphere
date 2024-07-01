@@ -14,7 +14,7 @@ const EventList = ({ searchQuery }) => {
       .get(`${apiUrl}/events/`)
       .then((response) => {
         console.log("Fetched Data: ", response.data);
-        //Access Whole Club Details with Club_Slug
+        //Accessing  Whole Club Details with Club_Slug
         const eventsWithClubDetails = response.data.map(async (event) => {
           const clubResponse = await api.get(`${apiUrl}/clubs/${event.club}/`);
           const clubDetails = clubResponse.data;
@@ -22,7 +22,7 @@ const EventList = ({ searchQuery }) => {
         });
         Promise.all(eventsWithClubDetails).then((eventsWithDetails) => {
           setEvent(eventsWithDetails);
-          setFilteredEvents(eventsWithDetails);
+          setFilteredEvents(eventsWithDetails); //For search filter
         });
       })
 
@@ -36,8 +36,10 @@ const EventList = ({ searchQuery }) => {
     if (searchQuery.trim() === "") {
       setFilteredEvents(events);
     } else {
-      const filtered = events.filter((event) =>
-        event.name.toLowerCase().includes(searchQuery.toLowerCase())
+      const filtered = events.filter(
+        (event) =>
+          event.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          event.club.name.toLowerCase().includes(searchQuery.toLowerCase())
       );
       setFilteredEvents(filtered);
     }
