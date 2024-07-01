@@ -61,6 +61,7 @@ const ClubDetail = () => {
               venue={event.venue}
               date={event.date}
               onDelete={() => handleDeleteEvent(event.id)}
+              clubOwner={club.created_by}
             />
           ))}
         </div>

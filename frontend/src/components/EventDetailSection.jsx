@@ -3,6 +3,8 @@ import LinkIcon from "@mui/icons-material/Link";
 import { Link } from "react-router-dom";
 import AnimatedText from "../styles/AnimatedText";
 import DeleteEvent from "./DeleteEvent";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { useAuth } from "../AuthContext";
 
 function EventDetailSection(props) {
   const formatDate = (dateString) => {
@@ -13,6 +15,12 @@ function EventDetailSection(props) {
   };
 
   const { formattedDate, formattedTime } = formatDate(props.date);
+
+  //Hover effects on delete icon
+  const [isHovering, setIsHovering] = useState(false);
+
+  // Authentication for Delete
+  const { user } = useAuth();
 
   const [showFullImage, setShowFullImage] = useState(false);
 
@@ -29,7 +37,7 @@ function EventDetailSection(props) {
   return (
     <div
       style={{ background: "#222" }}
-      className="rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition duration-300  hover:border-2 hover:border-white flex"
+      className="relative rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition duration-300 hover:border-2 hover:border-white flex"
     >
       {showFullImage ? (
         <div
@@ -52,18 +60,20 @@ function EventDetailSection(props) {
           />
         </div>
       )}
-      <div className="p-4 w-2/3">
-        <h2 className="text-xl text-gray-400 font-bold mb-2">
-          <AnimatedText text={props.title} />
-        </h2>
-        <p className="text-gray-400 mb-4">{props.description}</p>
-        <p className="text-gray-400 mb-4 text-sm">
-          Register{" "}
-          <Link to={props.link}>
-            <LinkIcon style={{ fontSize: "24px" }} />
-          </Link>
-        </p>
-        <div className="text-gray-400">
+      <div className="p-4 w-2/3 flex flex-col justify-between">
+        <div>
+          <h2 className="text-xl text-gray-400 font-bold mb-2">
+            <AnimatedText text={props.title} />
+          </h2>
+          <p className="text-gray-400 mb-4">{props.description}</p>
+          <p className="text-gray-400 mb-4 text-sm">
+            Register{" "}
+            <Link to={props.link}>
+              <LinkIcon style={{ fontSize: "24px" }} />
+            </Link>
+          </p>
+        </div>
+        <div className="text-gray-400 mb-4">
           <p className="mb-2">
             <span className="font-semibold text-blue-400">
               Venue: {props.venue}
@@ -78,15 +88,25 @@ function EventDetailSection(props) {
               Time: {formattedTime}
             </span>
           </p>
-          <button
-            onClick={() => {
-              handleDelete(props.id);
-            }}
-            className="btn btn-primary"
-          >
-            Delete
-          </button>
         </div>
+        {user.username === props.clubOwner ? (
+          <div className="absolute bottom-4 right-4">
+            <button
+              onMouseEnter={() => {
+                setIsHovering(true);
+              }}
+              onMouseLeave={() => {
+                setIsHovering(false);
+              }}
+              onClick={() => {
+                handleDelete(props.id);
+              }}
+              variant="outline-light bg-gray-500"
+            >
+              <DeleteIcon sx={{ color: isHovering ? "#fff" : "gray" }} />
+            </button>
+          </div>
+        ) : null}
       </div>
     </div>
   );
