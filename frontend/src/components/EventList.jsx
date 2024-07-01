@@ -4,8 +4,9 @@ import axios from "axios";
 import EventCard from "./EventCard";
 import api from "../api";
 
-const EventList = () => {
+const EventList = ({ searchQuery }) => {
   const [events, setEvent] = useState([]);
+  const [filteredEvents, setFilteredEvents] = useState([]);
 
   useEffect(() => {
     const apiUrl = import.meta.env.VITE_API_URL;
@@ -21,6 +22,7 @@ const EventList = () => {
         });
         Promise.all(eventsWithClubDetails).then((eventsWithDetails) => {
           setEvent(eventsWithDetails);
+          setFilteredEvents(eventsWithDetails);
         });
       })
 
@@ -29,13 +31,25 @@ const EventList = () => {
       });
   }, []);
 
+  //Filter based on search query
+  useEffect(() => {
+    if (searchQuery.trim() === "") {
+      setFilteredEvents(events);
+    } else {
+      const filtered = events.filter((event) =>
+        event.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredEvents(filtered);
+    }
+  }, [searchQuery, events]);
+
   if (!events) {
     return <div>Loading...</div>;
   }
 
   return (
     <div className="flex flex-wrap justify-between">
-      {events.map((event, index) => (
+      {filteredEvents.map((event, index) => (
         <div key={event.id} className="p-2 flex-grow-0">
           <EventCard
             image={event.img}

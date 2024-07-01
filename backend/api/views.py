@@ -7,12 +7,22 @@ from .serializers import ClubSerializer, EventSerializer, UserSerializer
 from .permissions import IsOwnerOrReadOnly, IsClubOrReadOnly
 from rest_framework.exceptions import ValidationError
 from django.shortcuts import get_object_or_404
+from django.db.models import Q
 
 class ClubViewSet(viewsets.ModelViewSet):
     queryset = Club.objects.all()
     serializer_class = ClubSerializer
     lookup_field = 'slug'
     permission_classes = [permissions.IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
+
+    def get_queryset(self):
+        queryset = Club.objects.all()
+        query = self.request.query_params.get('q')
+        if query:
+            queryset = queryset.filter(
+                Q(name__icontains=query) | Q(description__icontains=query)
+            )
+        return queryset
 
     def perform_create(self, serializer):
         if Club.objects.filter(created_by=self.request.user).exists():
@@ -24,12 +34,19 @@ class EventViewSet(viewsets.ModelViewSet):
     serializer_class = EventSerializer
     permission_classes= [permissions.IsAuthenticatedOrReadOnly , IsClubOrReadOnly]
 
+    def get_queryset(self):
+        queryset = Event.objects.all()
+        query = self.request.query_params.get('q')
+        if query:
+            queryset = queryset.filter(
+                Q(name__icontains=query) | Q(description__icontains=query)
+            )
+        return queryset
+
     def perform_create(self, serializer):
         club_slug = self.request.data.get('club')
         club = get_object_or_404(Club, slug=club_slug)
         serializer.save(club=club)
-    
-
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()

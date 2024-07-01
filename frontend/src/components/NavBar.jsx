@@ -12,7 +12,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import LoginIcon from "@mui/icons-material/Login";
 import AnimatedText from "../styles/AnimatedText";
 
-const NavBar = () => {
+const NavBar = ({ onSearchSubmit }) => {
   const { isAuthorized, user } = useAuth();
   const location = useLocation();
 
@@ -62,6 +62,16 @@ const NavBar = () => {
       ...prevVal,
       [name]: false,
     }));
+  };
+  // Handle Search | filter
+  const [searchQuery, setSearchQuery] = useState("");
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const handleSearchSubmit = () => {
+    onSearchSubmit(searchQuery);
   };
 
   return (
@@ -266,10 +276,17 @@ const NavBar = () => {
               <FormControl
                 type="text"
                 placeholder="Search"
+                value={searchQuery}
+                onChange={handleSearchChange}
                 className="me-2 transition duration-400 ease-in-out hover:scale-105 bg-gradient-to-r from-gray-400 to-gray-500 focus:outline-none"
               />
 
-              <Button variant="outline-light bg-gray-500">Search</Button>
+              <Button
+                onClick={handleSearchSubmit}
+                variant="outline-light bg-gray-500"
+              >
+                Search
+              </Button>
             </div>
           </Navbar.Collapse>
         </Container>
