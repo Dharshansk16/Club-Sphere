@@ -5,10 +5,18 @@ import EditIcon from "@mui/icons-material/Edit";
 import LinkIcon from "@mui/icons-material/Link";
 import { Link } from "react-router-dom";
 import { useAuth } from "../AuthContext";
+import { useEffect, useState } from "react";
 import AnimatedText from "../styles/AnimatedText";
+import { useLocation } from "react-router-dom";
 
 const ProfileCard = (props) => {
   const { user } = useAuth();
+  const [currentUser, setCurrentUser] = useState(null);
+  const location = useLocation();
+  useEffect(() => {
+    setCurrentUser(user);
+  }, [user]);
+
   return (
     <Container className="my-5">
       <Row className="justify-content-center transition duration-300 ease-in-out hover:scale-105">
@@ -63,7 +71,7 @@ const ProfileCard = (props) => {
                   </Col>
                 </Row>
                 <hr />
-                {user && user.username === props.owner && (
+                {currentUser && currentUser.username === props.owner && (
                   <div className="flex flex-row ">
                     <div className="mx-2">
                       <Link to={`/clubs/update/${props.slug}`}>

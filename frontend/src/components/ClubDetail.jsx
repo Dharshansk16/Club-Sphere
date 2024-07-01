@@ -6,15 +6,15 @@ import ProfileCard from "./ProfileCard";
 import EventDetailSection from "./EventDetailSection.jsx";
 import AnimatedText from "../styles/AnimatedText.jsx";
 import api from "../api.js";
+import { useAuth } from "../AuthContext.jsx";
 
 const ClubDetail = () => {
   const { slug } = useParams();
   const [club, setClub] = useState(null);
 
   useEffect(() => {
-    const apiUrl = import.meta.env.VITE_API_URL;
-    axios
-      .get(`${apiUrl}/clubs/${slug}/`)
+    api
+      .get(`clubs/${slug}/`)
       .then((response) => {
         console.log("Fetched Data: ", response.data);
         setClub(response.data);
