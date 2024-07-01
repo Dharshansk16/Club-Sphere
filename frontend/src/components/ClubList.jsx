@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import CustomCard from "./CustomCard";
 import { Container, Row, Col } from "react-bootstrap";
+import api from "../api";
 
 const ClubList = ({ searchQuery }) => {
   const [clubs, setClubs] = useState([]);
@@ -9,8 +10,8 @@ const ClubList = ({ searchQuery }) => {
 
   useEffect(() => {
     const apiUrl = import.meta.env.VITE_API_URL; // Access the Vite environment variable
-    axios
-      .get(`${apiUrl}/clubs/`)
+    api
+      .get(`/clubs/`)
       .then((response) => {
         console.log("Fetched Data: ", response.data);
         setClubs(response.data);

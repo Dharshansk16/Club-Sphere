@@ -11,7 +11,7 @@ const EventList = ({ searchQuery }) => {
   useEffect(() => {
     const apiUrl = import.meta.env.VITE_API_URL;
     api
-      .get(`${apiUrl}/events/`)
+      .get(`/events/`)
       .then((response) => {
         console.log("Fetched Data: ", response.data);
         //Accessing  Whole Club Details with Club_Slug

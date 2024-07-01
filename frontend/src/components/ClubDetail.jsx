@@ -13,8 +13,9 @@ const ClubDetail = () => {
   const [club, setClub] = useState(null);
 
   useEffect(() => {
-    api
-      .get(`clubs/${slug}/`)
+    const apiUrl = import.meta.env.VITE_API_URL;
+    axios
+      .get(`${apiUrl}/clubs/${slug}/`)
       .then((response) => {
         console.log("Fetched Data: ", response.data);
         setClub(response.data);
