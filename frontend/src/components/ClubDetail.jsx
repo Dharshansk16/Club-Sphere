@@ -5,6 +5,7 @@ import axios from "axios";
 import ProfileCard from "./ProfileCard";
 import EventDetailSection from "./EventDetailSection.jsx";
 import AnimatedText from "../styles/AnimatedText.jsx";
+import api from "../api.js";
 
 const ClubDetail = () => {
   const { slug } = useParams();
@@ -22,6 +23,13 @@ const ClubDetail = () => {
         console.error("There was an error fetching the club details!", error);
       });
   }, [slug]);
+
+  const handleDeleteEvent = (deletedEventID) => {
+    setClub((prevClub) => ({
+      ...prevClub,
+      events: prevClub.events.filter((event) => event.id !== deletedEventID),
+    }));
+  };
 
   if (!club) {
     return <div>Loading...</div>;
@@ -52,6 +60,7 @@ const ClubDetail = () => {
               link={event.link}
               venue={event.venue}
               date={event.date}
+              onDelete={() => handleDeleteEvent(event.id)}
             />
           ))}
         </div>

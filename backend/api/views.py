@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 from .models import Club, Event
 from .serializers import ClubSerializer, EventSerializer, UserSerializer
-from .permissions import IsOwnerOrReadOnly
+from .permissions import IsOwnerOrReadOnly, IsClubOrReadOnly
 from rest_framework.exceptions import ValidationError
 from django.shortcuts import get_object_or_404
 
@@ -22,11 +22,14 @@ class ClubViewSet(viewsets.ModelViewSet):
 class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
+    permission_classes= [permissions.IsAuthenticatedOrReadOnly , IsClubOrReadOnly]
 
     def perform_create(self, serializer):
         club_slug = self.request.data.get('club')
         club = get_object_or_404(Club, slug=club_slug)
         serializer.save(club=club)
+    
+
 
 class UserViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = User.objects.all()

@@ -2,6 +2,7 @@ import { useState } from "react";
 import LinkIcon from "@mui/icons-material/Link";
 import { Link } from "react-router-dom";
 import AnimatedText from "../styles/AnimatedText";
+import DeleteEvent from "./DeleteEvent";
 
 function EventDetailSection(props) {
   const formatDate = (dateString) => {
@@ -18,6 +19,13 @@ function EventDetailSection(props) {
   const toggleFullImage = () => {
     setShowFullImage(!showFullImage);
   };
+
+  const handleDelete = (eventID) => {
+    if (window.confirm("Are you sure you want to delete this event?")) {
+      DeleteEvent(eventID, props.onDelete); // onDelete callback from props
+    }
+  };
+
   return (
     <div
       style={{ background: "#222" }}
@@ -70,6 +78,14 @@ function EventDetailSection(props) {
               Time: {formattedTime}
             </span>
           </p>
+          <button
+            onClick={() => {
+              handleDelete(props.id);
+            }}
+            className="btn btn-primary"
+          >
+            Delete
+          </button>
         </div>
       </div>
     </div>

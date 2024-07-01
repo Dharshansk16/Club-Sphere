@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import CustomCard from "./CustomCard";
 import { Container, Row, Col } from "react-bootstrap";
-import { useAuth } from "../AuthContext";
 
 const ClubList = () => {
   const [clubs, setClubs] = useState([]);
@@ -10,7 +9,6 @@ const ClubList = () => {
   useEffect(() => {
     const apiUrl = import.meta.env.VITE_API_URL; // Access the Vite environment variable
     axios
-
       .get(`${apiUrl}/clubs/`)
       .then((response) => {
         console.log("Fetched Data: ", response.data);
