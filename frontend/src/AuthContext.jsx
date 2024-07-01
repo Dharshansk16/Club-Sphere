@@ -75,8 +75,24 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const setLoginData = (userData) => {
+    setAuthState({
+      isAuthorized: true,
+      user: userData,
+    });
+  };
+
+  const logout = () => {
+    localStorage.removeItem(ACCESS_TOKEN);
+    localStorage.removeItem(REFRESH_TOKEN);
+    setAuthState({
+      isAuthorized: false,
+      user: null,
+    });
+  };
+
   return (
-    <AuthContext.Provider value={authState}>
+    <AuthContext.Provider value={{ ...authState, setLoginData, logout }}>
       {authState.isAuthorized === null ? <div>Loading...</div> : children}
     </AuthContext.Provider>
   );

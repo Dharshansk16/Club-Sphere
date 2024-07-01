@@ -15,11 +15,13 @@ import { AuthProvider } from "./AuthContext";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Update from "./pages/Update";
 import AddEvent from "./components/AddEvent";
+import { useAuth } from "./AuthContext";
 
 function App() {
   function Logout() {
-    localStorage.clear();
-    return <Navigate to="/login" replace />;
+    const { logout } = useAuth();
+    logout();
+    return <Navigate to="/" replace />;
   }
 
   return (

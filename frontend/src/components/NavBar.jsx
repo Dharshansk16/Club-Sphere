@@ -13,7 +13,7 @@ import LoginIcon from "@mui/icons-material/Login";
 import AnimatedText from "../styles/AnimatedText";
 
 const NavBar = () => {
-  const { isAuthorized, user } = useAuth();
+  const { isAuthorized, user, logout } = useAuth();
   const location = useLocation();
 
   // Hover state
@@ -230,7 +230,7 @@ const NavBar = () => {
                   onMouseLeave={() => handleMouseLeave("logout")}
                   className="mx-4 transition duration-400 ease-in-out transform hover:scale-110"
                 >
-                  <NavLink to={"/logout/"} className="no-underline">
+                  <NavLink to={"/logout"} className="no-underline">
                     <LogoutIcon
                       sx={{
                         color: isHovering.logout ? "#FFFFFF" : "gray",

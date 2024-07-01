@@ -4,11 +4,13 @@ import { useNavigate } from "react-router-dom";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 import api from "../api";
 import LoginForm from "../components/LoginForm";
+import { useAuth } from "../AuthContext";
 
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [errorText, setErrorText] = useState("");
+  const { setLoginData } = useAuth();
   const navigate = useNavigate();
 
   const handleChange = (event) => {
@@ -28,6 +30,8 @@ const Login = () => {
         console.log("Login successful:");
         localStorage.setItem(ACCESS_TOKEN, res.data.access);
         localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
+        const userData = res.data;
+        setLoginData(userData);
         navigate("/");
       })
       .catch((err) => {
