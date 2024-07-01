@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 import { useNavigate } from "react-router-dom";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
@@ -42,14 +42,22 @@ const Login = () => {
   };
 
   return (
-    <LoginForm
-      name={username}
-      password={password}
-      callHandleChange={handleChange}
-      callHandlePasswordChange={handlePasswordChange}
-      callHandleSubmit={handleSubmit}
-      errorText={errorText}
-    />
+    <>
+      <div className="bg-gray-800 text-white py-2">
+        <marquee direction="left">
+          Kindly refresh the page after logging in to ensure all features are
+          fully loaded.
+        </marquee>
+      </div>
+      <LoginForm
+        name={username}
+        password={password}
+        callHandleChange={handleChange}
+        callHandlePasswordChange={handlePasswordChange}
+        callHandleSubmit={handleSubmit}
+        errorText={errorText}
+      />
+    </>
   );
 };
 

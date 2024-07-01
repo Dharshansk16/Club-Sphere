@@ -89,7 +89,7 @@ function EventDetailSection(props) {
             </span>
           </p>
         </div>
-        {user.username === props.clubOwner ? (
+        {user && user.username === props.clubOwner && (
           <div className="absolute bottom-4 right-4">
             <button
               onMouseEnter={() => {
@@ -106,7 +106,7 @@ function EventDetailSection(props) {
               <DeleteIcon sx={{ color: isHovering ? "#fff" : "gray" }} />
             </button>
           </div>
-        ) : null}
+        )}
       </div>
     </div>
   );

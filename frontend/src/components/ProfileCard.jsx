@@ -63,26 +63,25 @@ const ProfileCard = (props) => {
                   </Col>
                 </Row>
                 <hr />
-                <div className="flex flex-row ">
-                  <div className="mx-2">
-                    {user.username === props.owner && (
+                {user && user.username === props.owner && (
+                  <div className="flex flex-row ">
+                    <div className="mx-2">
                       <Link to={`/clubs/update/${props.slug}`}>
                         <Button variant="outline-light bg-gray-500">
                           Edit Profile
                         </Button>
                       </Link>
-                    )}
-                  </div>
-                  <div className="mx-2">
-                    {user.username === props.owner && (
+                    </div>
+
+                    <div className="mx-2">
                       <Link to={"/events/add/"}>
                         <Button variant="outline-light bg-gray-500">
                           Add Event
                         </Button>
                       </Link>
-                    )}
+                    </div>
                   </div>
-                </div>
+                )}
               </Card.Body>
             </Card>
           </Grow>
