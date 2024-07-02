@@ -16,6 +16,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Update from "./pages/Update";
 import AddEvent from "./components/AddEvent";
 import { useAuth } from "./AuthContext";
+import UpdateEvent from "./components/UpdateEvent";
 
 function App() {
   function Logout() {
@@ -51,6 +52,7 @@ function App() {
             }
           />
           <Route path="/events/add/" element={<AddEvent />} />
+          <Route path="/events/update/:id" element={<UpdateEvent />} />
         </Routes>
       </Router>
     </AuthProvider>

@@ -12,8 +12,8 @@ const AddEvent = () => {
     description: "",
     date: "",
     venue: "",
-    img: null, // For image upload if needed
-    link: "", // URL field
+    img: null,
+    link: "",
   });
 
   const handleSubmit = async (e) => {
@@ -39,7 +39,6 @@ const AddEvent = () => {
       navigate(`/clubs/${response.data.club}/`);
     } catch (error) {
       console.error("Error creating event:", error);
-      // Handle error display or other logic
     }
   };
 

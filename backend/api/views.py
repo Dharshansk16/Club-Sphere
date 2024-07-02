@@ -8,6 +8,7 @@ from .permissions import IsOwnerOrReadOnly, IsClubOrReadOnly
 from rest_framework.exceptions import ValidationError
 from django.shortcuts import get_object_or_404
 from django.db.models import Q
+from rest_framework.parsers import MultiPartParser, FormParser
 
 class ClubViewSet(viewsets.ModelViewSet):
     queryset = Club.objects.all()
@@ -33,6 +34,8 @@ class EventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
     permission_classes= [permissions.IsAuthenticatedOrReadOnly , IsClubOrReadOnly]
+    parser_classes = (MultiPartParser, FormParser)
+
 
     def get_queryset(self):
         queryset = Event.objects.all()

@@ -5,6 +5,8 @@ import AnimatedText from "../styles/AnimatedText";
 import DeleteEvent from "./DeleteEvent";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useAuth } from "../AuthContext";
+import ButtonVariant from "./ButtonVariant";
+import EditIcon from "@mui/icons-material/Edit";
 
 function EventDetailSection(props) {
   const formatDate = (dateString) => {
@@ -16,8 +18,29 @@ function EventDetailSection(props) {
 
   const { formattedDate, formattedTime } = formatDate(props.date);
 
-  //Hover effects on delete icon
-  const [isHovering, setIsHovering] = useState(false);
+  //Hover effects on Icons
+  const [isHovering, setIsHovering] = useState({
+    edit: false,
+    delete: false,
+  });
+  // Handle Hovering
+  const handleMouseEnter = (name) => {
+    setIsHovering((prevVal) => {
+      return {
+        ...prevVal,
+        [name]: true,
+      };
+    });
+  };
+
+  const handleMouseLeave = (name) => {
+    setIsHovering((prevVal) => {
+      return {
+        ...prevVal,
+        [name]: false,
+      };
+    });
+  };
 
   // Authentication for Delete
   const { user } = useAuth();
@@ -66,12 +89,6 @@ function EventDetailSection(props) {
             <AnimatedText text={props.title} />
           </h2>
           <p className="text-gray-400 mb-4">{props.description}</p>
-          <p className="text-gray-400 mb-4 text-sm">
-            Register{" "}
-            <Link to={props.link}>
-              <LinkIcon style={{ fontSize: "24px" }} />
-            </Link>
-          </p>
         </div>
         <div className="text-gray-400 mb-4">
           <p className="mb-2">
@@ -87,23 +104,38 @@ function EventDetailSection(props) {
             <span className="font-semibold text-sm text-blue-400">
               Time: {formattedTime}
             </span>
+            <br />
+            <p className="mt-4">
+              <Link to={props.link}>
+                <ButtonVariant buttonText="Register" borderRadius="25px" />
+              </Link>
+            </p>
           </p>
         </div>
         {user && user.username === props.clubOwner && (
-          <div className="absolute bottom-4 right-4">
+          <div className="absolute bottom-4 right-4 flex flex-col">
+            <Link
+              onMouseEnter={() => handleMouseEnter("edit")}
+              onMouseLeave={() => handleMouseLeave("edit")}
+              to={`/events/update/${props.id}/`}
+              className="no-underline"
+            >
+              <EditIcon
+                sx={{
+                  color: isHovering.edit ? "#fff" : "gray",
+                  marginBottom: "5px",
+                }}
+              />
+            </Link>
             <button
-              onMouseEnter={() => {
-                setIsHovering(true);
-              }}
-              onMouseLeave={() => {
-                setIsHovering(false);
-              }}
+              onMouseEnter={() => handleMouseEnter("delete")}
+              onMouseLeave={() => handleMouseLeave("delete")}
               onClick={() => {
                 handleDelete(props.id);
               }}
               variant="outline-light bg-gray-500"
             >
-              <DeleteIcon sx={{ color: isHovering ? "#fff" : "gray" }} />
+              <DeleteIcon sx={{ color: isHovering.delete ? "#fff" : "gray" }} />
             </button>
           </div>
         )}

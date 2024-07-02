@@ -68,7 +68,7 @@ export const AuthProvider = ({ children }) => {
     const tokenExpiration = decoded.exp;
     const now = Date.now() / 1000;
 
-    if (tokenExpiration - now < 60) {
+    if (tokenExpiration < now) {
       await refreshToken();
     } else {
       await fetchCurrentUser(token);
