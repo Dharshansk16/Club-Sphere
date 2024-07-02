@@ -63,6 +63,7 @@ const EventList = ({ searchQuery }) => {
               date={event.date}
               venue={event.venue}
               slug={event.club.slug}
+              link={event.link}
               id={event.id}
             />
           </Col>

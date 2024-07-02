@@ -2,6 +2,7 @@ import EventList from "../components/EventList";
 import NavBar from "../components/NavBar";
 import { useState } from "react";
 import AnimatedText from "../styles/AnimatedText";
+import { propTypes } from "react-bootstrap/esm/Image";
 
 function Event() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -15,7 +16,7 @@ function Event() {
       <div className="container mx-auto mt-2 px-2 flex-grow">
         <div className="text-center mb-4 mt-2">
           <h1 className="text-4xl font-bold text-indigo-400 transition duration-500 ease-in-out transform hover:scale-105">
-            <AnimatedText text="Upcoming Events" />
+            <AnimatedText fontStyle="Helvetica" text="Upcoming Events" />
           </h1>
         </div>
 

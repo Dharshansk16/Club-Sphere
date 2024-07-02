@@ -4,7 +4,10 @@ const AnimatedText = (props) => {
   return (
     <div>
       {props.text && (
-        <span className="animated-text bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ...">
+        <span
+          style={{ fontFamily: props.fontStyle }}
+          className="animated-text bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 ..."
+        >
           {props.text}
         </span>
       )}

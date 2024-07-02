@@ -70,7 +70,8 @@ const NavBar = ({ onSearchSubmit }) => {
     setSearchQuery(event.target.value);
   };
 
-  const handleSearchSubmit = () => {
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
     onSearchSubmit(searchQuery);
   };
 
@@ -273,20 +274,22 @@ const NavBar = ({ onSearchSubmit }) => {
               )}
             </Nav>
             <div className="d-flex align-items-center">
-              <FormControl
-                type="text"
-                placeholder="Search"
-                value={searchQuery}
-                onChange={handleSearchChange}
-                className="me-2 transition duration-400 ease-in-out hover:scale-105 bg-gradient-to-r from-gray-400 to-gray-500 focus:outline-none"
-              />
-
-              <Button
-                onClick={handleSearchSubmit}
-                variant="outline-light bg-gray-500"
+              <form
+                onSubmit={handleSearchSubmit}
+                className="d-flex align-items-center"
               >
-                Search
-              </Button>
+                <FormControl
+                  type="text"
+                  placeholder="Search"
+                  value={searchQuery}
+                  onChange={handleSearchChange}
+                  className="me-2 transition duration-400 ease-in-out hover:scale-105 bg-gradient-to-r from-gray-400 to-gray-500 focus:outline-none flex-grow-1"
+                />
+
+                <Button type="submit" variant="outline-light bg-gray-500">
+                  Search
+                </Button>
+              </form>
             </div>
           </Navbar.Collapse>
         </Container>

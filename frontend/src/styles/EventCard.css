@@ -1,18 +1,29 @@
 .flip-card {
   background-color: transparent;
-  width: 20rem;
-  height: 400px;
+  width: 22rem;
+  height: 450px;
   perspective: 1000px;
   cursor: pointer;
 }
 
 .flip-card-inner {
   position: relative;
+  border-radius: 25px 25px 5px 5px;
   width: 100%;
   height: 100%;
   text-align: center;
   transition: transform 0.8s;
   transform-style: preserve-3d;
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 0 rgba(255, 255, 255, 0);
+  }
+  100% {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.6); /* Brighter glow */
+  }
 }
 
 .flip-card.flipped .flip-card-inner {
@@ -25,11 +36,13 @@
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  border-radius: 10px;
+  border-radius: 25px;
 }
 
 .flip-card-back {
   background-color: #222222;
+  border-radius: 25px;
+
   color: white;
   transform: rotateY(180deg);
 }

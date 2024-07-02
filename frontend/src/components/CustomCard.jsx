@@ -3,6 +3,7 @@ import { Card, Button } from "react-bootstrap";
 import AnimatedText from "../styles/AnimatedText";
 import { Link } from "react-router-dom";
 import { Zoom } from "@mui/material";
+import "../styles/CustomCard.css";
 
 function CustomCard(props) {
   return (
@@ -15,7 +16,7 @@ function CustomCard(props) {
           maxWidth: "400px",
           borderRadius: "15px",
         }}
-        className="mb-4   transition duration-300 ease-in-out transform hover:scale-105  hover:border-2 hover:border-white"
+        className="mb-4  animate-card transition duration-300 ease-in-out transform hover:scale-105  hover:border-2 hover:border-white"
       >
         <Zoom in={true} timeout={900}>
           <Card.Body className="d-flex">

@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import AnimatedText from "../styles/AnimatedText";
 import "../styles/EventCard.css";
 import ButtonVariant from "./ButtonVariant";
+import { Collapse } from "@mui/material";
 
 function EventCard(props) {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -26,6 +27,11 @@ function EventCard(props) {
     setIsFlipped(!isFlipped);
   };
 
+  const handleButtonClick = (event) => {
+    event.stopPropagation();
+    setIsFlipped(false);
+  };
+
   return (
     <div
       className={`flip-card ${isFlipped ? "flipped" : ""}`}
@@ -39,25 +45,20 @@ function EventCard(props) {
               color: "#fff",
               height: "450px",
               width: "22rem",
-              borderRadius: "10px",
+              borderTopLeftRadius: "20px",
+              borderTopRightRadius: "20px",
             }}
             className="mb-4  transition duration-300 ease-in-out transform hover:scale-105 hover:border-2 hover:border-white"
           >
             <Zoom in={true} timeout={900}>
-              <div
-                className="relative w-full h-3/4 bg-black"
-                style={{
-                  borderTopLeftRadius: "10px",
-                  borderTopRightRadius: "10px",
-                }}
-              >
+              <div className="relative w-full h-3/4 bg-transperent">
                 <img
                   src={props.image}
                   alt="Card Image"
                   className="w-full h-full object-cover"
                   style={{
-                    borderTopLeftRadius: "10px",
-                    borderTopRightRadius: "10px",
+                    borderTopLeftRadius: "20px",
+                    borderTopRightRadius: "20px",
                   }}
                 />
               </div>
@@ -68,11 +69,14 @@ function EventCard(props) {
                   <Card.Title>
                     <AnimatedText text={props.name} />
                   </Card.Title>
-                  <ButtonVariant
-                    borderRadius="50px"
-                    padding="4px 32px"
-                    buttonText="Register"
-                  />
+                  <Link to={props.link} className="no-underline">
+                    <ButtonVariant
+                      borderRadius="50px"
+                      padding="8px 32px"
+                      buttonText="Register"
+                      onButtonClick={handleButtonClick}
+                    />
+                  </Link>
                 </div>
                 {/* <div className="absolute bottom-2 left-2">
                   <Card.Text className="text-sm text-blue-400">
@@ -88,9 +92,10 @@ function EventCard(props) {
             style={{
               background: "#222222",
               color: "#fff",
-              height: "400px",
-              width: "20rem",
-              borderRadius: "10px",
+              height: "450px",
+              width: "22rem",
+              borderTopLeftRadius: "20px",
+              borderTopRightRadius: "20px",
             }}
             className="mb-4"
           >
@@ -107,7 +112,9 @@ function EventCard(props) {
                 <div className="text-sm">
                   <Card.Text className="text-sm text-blue-400">
                     Venue: {props.venue} <br />
-                    {props.clubname}
+                    <Link to={`/clubs/${props.slug}/`} className="no-underline">
+                      <span> Visit: {props.clubname} </span>
+                    </Link>
                   </Card.Text>
                 </div>
                 <div className="text-right">
