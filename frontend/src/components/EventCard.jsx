@@ -41,7 +41,7 @@ function EventCard(props) {
               width: "20rem",
               borderRadius: "10px",
             }}
-            className="mb-4 transition duration-300 ease-in-out transform hover:scale-105 hover:border-2 hover:border-white"
+            className="mb-4  transition duration-300 ease-in-out transform hover:scale-105 hover:border-2 hover:border-white"
           >
             <Zoom in={true} timeout={900}>
               <div
