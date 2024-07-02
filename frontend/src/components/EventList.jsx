@@ -51,13 +51,10 @@ const EventList = ({ searchQuery }) => {
   }
 
   return (
-    <div className="container mt-4 flex flex-wrap justify-between">
-      <Row xs={1} md={2} lg={3} className="g-4 w-full">
+    <div className="container mt-4">
+      <Row xs={1} md={2} lg={3} className="justify-between">
         {filteredEvents.map((event, index) => (
-          <Col
-            key={event.id}
-            className="p-2 flex-grow-0 w-full md:w-1/2 lg:w-1/3"
-          >
+          <Col key={event.id} className="p-2 mb-16">
             <EventCard
               image={event.img}
               name={event.name}

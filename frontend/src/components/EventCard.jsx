@@ -38,7 +38,7 @@ function EventCard(props) {
               background: "#222222",
               color: "#fff",
               height: "450px",
-              width: "20rem",
+              width: "22rem",
               borderRadius: "10px",
             }}
             className="mb-4  transition duration-300 ease-in-out transform hover:scale-105 hover:border-2 hover:border-white"

@@ -9,17 +9,19 @@ function Event() {
     setSearchQuery(query);
   };
   return (
-    <div className=" bg-zinc-950 min-h-screen text-white">
+    <div className="flex flex-col min-h-[100vh] bg-zinc-950 text-white">
       <NavBar onSearchSubmit={handleSearchSubmit} />
-      <div className="container mx-auto mt-4 px-4">
-        <div className="text-center my-8">
+
+      <div className="container mx-auto mt-2 px-2 flex-grow">
+        <div className="text-center mb-4 mt-2">
           <h1 className="text-4xl font-bold text-indigo-400 transition duration-500 ease-in-out transform hover:scale-105">
             <AnimatedText text="Upcoming Events" />
           </h1>
         </div>
-      </div>
-      <div className="container mt-4">
-        <EventList searchQuery={searchQuery} />
+
+        <div className="mt-4 flex-grow">
+          <EventList searchQuery={searchQuery} />
+        </div>
       </div>
     </div>
   );
