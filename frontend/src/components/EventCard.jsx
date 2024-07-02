@@ -66,7 +66,7 @@ function EventCard(props) {
             <Zoom in={true} timeout={900}>
               <Card.Body className="flex flex-col justify-between p-3">
                 <div className="mb-4">
-                  <Card.Title>
+                  <Card.Title style={{ marginBottom: "10px" }}>
                     <AnimatedText text={props.name} />
                   </Card.Title>
                   <Link to={props.link} className="no-underline">

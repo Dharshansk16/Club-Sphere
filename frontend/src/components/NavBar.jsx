@@ -96,6 +96,13 @@ const NavBar = ({ onSearchSubmit }) => {
         variant="dark"
         expand="lg"
         className="mb-4 bg-neutral-950 shadow-md"
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          width: "100%",
+          zIndex: 1100,
+        }}
       >
         <Container fluid>
           <Navbar.Brand className="transition duration-300 ease-in-out transform hover:scale-110">
@@ -291,6 +298,7 @@ const NavBar = ({ onSearchSubmit }) => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      <div className="pt-24"></div>
     </>
   );
 };
