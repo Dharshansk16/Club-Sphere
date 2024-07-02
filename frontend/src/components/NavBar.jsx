@@ -194,11 +194,8 @@ const NavBar = ({ onSearchSubmit }) => {
                             : "gray",
                       }}
                     />
-
                     {isHovering.profile && (
-                      <span className="ml-1 font-bold text-white">
-                        {user.club.name}
-                      </span>
+                      <span className="ml-1 font-bold text-white">My Club</span>
                     )}
                   </NavLink>
                 </Nav.Link>

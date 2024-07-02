@@ -13,16 +13,15 @@ const ClubDetail = () => {
   const [club, setClub] = useState(null);
 
   useEffect(() => {
-    const apiUrl = import.meta.env.VITE_API_URL;
-    axios
-      .get(`${apiUrl}/clubs/${slug}/`)
-      .then((response) => {
-        console.log("Fetched Data: ", response.data);
+    const fetchClubDetails = async () => {
+      try {
+        const response = await api.get(`/clubs/${slug}/`);
         setClub(response.data);
-      })
-      .catch((error) => {
-        console.error("There was an error fetching the club details!", error);
-      });
+      } catch (error) {
+        console.log("An error occured while fetching club details!", error);
+      }
+    };
+    fetchClubDetails();
   }, [slug]);
 
   const handleDeleteEvent = (deletedEventID) => {

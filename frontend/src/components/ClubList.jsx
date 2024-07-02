@@ -9,17 +9,16 @@ const ClubList = ({ searchQuery }) => {
   const [filteredClubs, setFilteredClubs] = useState([]);
 
   useEffect(() => {
-    const apiUrl = import.meta.env.VITE_API_URL; // Access the Vite environment variable
-    api
-      .get(`/clubs/`)
-      .then((response) => {
-        console.log("Fetched Data: ", response.data);
+    const fetchClubs = async () => {
+      try {
+        const response = await api.get(`/clubs/`);
         setClubs(response.data);
         setFilteredClubs(response.data);
-      })
-      .catch((error) => {
-        console.error("There was an error fetching the clubs!", error);
-      });
+      } catch (error) {
+        console.log("There was an Error While Fetching the Club", error);
+      }
+    };
+    fetchClubs();
   }, []);
 
   //Filter clubs based on search query

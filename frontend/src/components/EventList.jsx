@@ -8,28 +8,31 @@ import { Row, Col } from "react-bootstrap";
 const EventList = ({ searchQuery }) => {
   const [events, setEvent] = useState([]);
   const [filteredEvents, setFilteredEvents] = useState([]);
-
   useEffect(() => {
-    const apiUrl = import.meta.env.VITE_API_URL;
-    api
-      .get(`/events/`)
-      .then((response) => {
+    const fetchEventsWithClubDetails = async () => {
+      try {
+        const apiUrl = import.meta.env.VITE_API_URL;
+        const response = await api.get(`/events/`);
         console.log("Fetched Data: ", response.data);
-        //Accessing  Whole Club Details with Club_Slug
-        const eventsWithClubDetails = response.data.map(async (event) => {
-          const clubResponse = await api.get(`${apiUrl}/clubs/${event.club}/`);
-          const clubDetails = clubResponse.data;
-          return { ...event, club: clubDetails };
-        });
-        Promise.all(eventsWithClubDetails).then((eventsWithDetails) => {
-          setEvent(eventsWithDetails);
-          setFilteredEvents(eventsWithDetails); //For search filter
-        });
-      })
 
-      .catch((error) => {
+        const eventsWithClubDetails = await Promise.all(
+          response.data.map(async (event) => {
+            const clubResponse = await api.get(
+              `${apiUrl}/clubs/${event.club}/`
+            );
+            const clubDetails = clubResponse.data;
+            return { ...event, club: clubDetails };
+          })
+        );
+
+        setEvent(eventsWithClubDetails);
+        setFilteredEvents(eventsWithClubDetails); //to perform search/filter
+      } catch (error) {
         console.error("There was an error fetching the club details!", error);
-      });
+      }
+    };
+
+    fetchEventsWithClubDetails();
   }, []);
 
   //Filter based on search query
