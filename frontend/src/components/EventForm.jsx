@@ -8,7 +8,7 @@ function EventForm(props) {
         className=" shadow-lg rounded-lg p-8 max-w-xl w-full transition transform hover:scale-105 duration-300 ease-in-out"
       >
         <h1 className="text-2xl font-bold mb-4">
-          <AnimatedText text="Add Event" />
+          <AnimatedText text={props.formName} />
         </h1>
         <p className="error message text-sm text-red-600">{props.errorText}</p>
         <form onSubmit={props.callHandleSubmit} className="mt-4">

@@ -97,6 +97,7 @@ const UpdateEvent = () => {
       date={formData.date}
       callHandleChange={handleChange}
       callHandleSubmit={handleSubmit}
+      formName="Edit Event"
     />
   );
 };

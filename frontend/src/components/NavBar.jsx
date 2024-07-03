@@ -102,7 +102,7 @@ const NavBar = ({ onSearchSubmit }) => {
           left: 0,
           width: "100%",
           zIndex: 1100,
-          backgroundColor: "rgba(0, 0, 0, 0.1)",
+          backgroundColor: "rgba(0, 0, 0, 0.2)",
         }}
       >
         <Container fluid>

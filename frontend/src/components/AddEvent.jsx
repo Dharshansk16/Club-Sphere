@@ -59,6 +59,7 @@ const AddEvent = () => {
       date={formData.date}
       callHandleChange={handleChange}
       callHandleSubmit={handleSubmit}
+      formName="Add Event"
     />
   );
 };
