@@ -26,9 +26,9 @@ function App() {
   }
 
   return (
-    <AuthProvider>
-      {/* Wrap your app with AuthProvider */}
-      <Router>
+    <Router>
+      <AuthProvider>
+        {/* Wrap your app with AuthProvider */}
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/logout" element={<Logout />} />
@@ -68,8 +68,8 @@ function App() {
             }
           />
         </Routes>
-      </Router>
-    </AuthProvider>
+      </AuthProvider>
+    </Router>
   );
 }
 

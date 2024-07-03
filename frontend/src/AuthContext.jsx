@@ -2,6 +2,7 @@ import React, { createContext, useState, useEffect, useContext } from "react";
 import { jwtDecode } from "jwt-decode";
 import api from "./api";
 import { REFRESH_TOKEN, ACCESS_TOKEN } from "./constants";
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
@@ -10,7 +11,7 @@ export const AuthProvider = ({ children }) => {
     isAuthorized: null,
     user: null,
   });
-
+  const navigate = useNavigate();
   const apiUrl = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
@@ -80,6 +81,8 @@ export const AuthProvider = ({ children }) => {
       isAuthorized: true,
       user: userData,
     });
+    navigate("/", { replace: true });
+    window.location.reload();
   };
 
   const logout = () => {

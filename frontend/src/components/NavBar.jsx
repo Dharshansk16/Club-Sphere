@@ -126,154 +126,136 @@ const NavBar = ({ onSearchSubmit }) => {
           <Navbar.Collapse id="navbar-nav">
             <Nav className="pb-1 me-auto">
               <Nav.Link
+                as={NavLink}
+                to="/"
+                name="home"
+                onClick={
+                  () => setIsHovering({ ...isHovering, profile: false }) //Profile is set to False due to authorization condition
+                }
                 onMouseEnter={() => handleMouseEnter("home")}
                 onMouseLeave={() => handleMouseLeave("home")}
-                className="mx-4 transition duration-400 ease-in-out transform hover:scale-110"
+                className="no-underline mx-4 mt-2 transition duration-400 ease-in-out transform hover:scale-110"
               >
-                <NavLink
-                  to="/"
-                  className="no-underline"
-                  name="home"
-                  onClick={
-                    () => setIsHovering({ ...isHovering, profile: false }) //Profile is set to False due to authorization condition
-                  }
-                >
-                  <HomeIcon
-                    sx={{
-                      fontSize: 30,
-                      color:
-                        isActive("/") || isHovering.home ? "#FFFFFF" : "gray",
-                    }}
-                  />
-                  {isHovering.home && (
-                    <span className="ml-1 text-white font-bold">Home</span>
-                  )}
-                </NavLink>
+                <HomeIcon
+                  sx={{
+                    fontSize: 30,
+                    color:
+                      isActive("/") || isHovering.home ? "#FFFFFF" : "gray",
+                  }}
+                />
+                {isHovering.home && (
+                  <span className="ml-1 text-white font-bold">Home</span>
+                )}
               </Nav.Link>
               <Nav.Link
+                as={NavLink}
+                to={"/events"}
+                onClick={() => setIsHovering({ ...isHovering, profile: false })}
                 onMouseEnter={() => handleMouseEnter("events")}
                 onMouseLeave={() => handleMouseLeave("events")}
-                className=" mx-4 transition duration-400 ease-in-out transform hover:scale-110"
+                className="no-underline mx-4 mt-2 transition duration-400 ease-in-out transform hover:scale-110"
               >
-                <NavLink
-                  to={"/events"}
-                  className="no-underline"
-                  name="events"
+                <EventNoteIcon
+                  sx={{
+                    fontSize: 30,
+                    color:
+                      isActive("/events") || isHovering.events
+                        ? "#FFFFFF"
+                        : "gray",
+                  }}
+                />
+                {isHovering.events && (
+                  <span className="ml-1 text-white font-bold">Events</span>
+                )}
+              </Nav.Link>
+              {user && user.club && user.club.slug && (
+                <Nav.Link
+                  as={NavLink}
+                  to={`/clubs/${user.club.slug}`}
                   onClick={() =>
-                    setIsHovering({ ...isHovering, profile: false })
+                    setIsHovering({ ...isHovering, profile: true })
                   }
+                  onMouseEnter={() => handleMouseEnter("profile")}
+                  onMouseLeave={() => handleMouseLeave("profile")}
+                  className="no-underline mx-4 mt-2 transition duration-400 ease-in-out transform hover:scale-110"
                 >
-                  <EventNoteIcon
+                  <DashboardIcon
                     sx={{
                       fontSize: 30,
                       color:
-                        isActive("/events") || isHovering.events
+                        isActive(`/clubs/${user.club.slug}`) ||
+                        isHovering.profile
                           ? "#FFFFFF"
                           : "gray",
                     }}
                   />
-                  {isHovering.events && (
-                    <span className="ml-1 text-white font-bold">Events</span>
+                  {isHovering.profile && (
+                    <span className="ml-1 font-bold text-white">My Club</span>
                   )}
-                </NavLink>
-              </Nav.Link>
-              {user && user.club && user.club.slug && (
-                <Nav.Link
-                  onMouseEnter={() => handleMouseEnter("profile")}
-                  onMouseLeave={() => handleMouseLeave("profile")}
-                  className="mx-4 transition duration-400 ease-in-out transform hover:scale-110"
-                >
-                  <NavLink
-                    to={`/clubs/${user.club.slug}`}
-                    className="no-underline"
-                    name="profile"
-                    onClick={() =>
-                      setIsHovering({ ...isHovering, profile: true })
-                    }
-                  >
-                    <DashboardIcon
-                      sx={{
-                        fontSize: 30,
-                        color:
-                          isActive(`/clubs/${user.club.slug}`) ||
-                          isHovering.profile
-                            ? "#FFFFFF"
-                            : "gray",
-                      }}
-                    />
-                    {isHovering.profile && (
-                      <span className="ml-1 font-bold text-white">My Club</span>
-                    )}
-                  </NavLink>
                 </Nav.Link>
               )}
               {isAuthorized && (
                 <Nav.Link
+                  as={NavLink}
+                  to={"/clubs/register/"}
+                  name="register"
+                  onClick={() => {
+                    setIsHovering({ ...isHovering, profile: false });
+                  }}
                   onMouseEnter={() => {
                     handleMouseEnter("register");
                   }}
                   onMouseLeave={() => {
                     handleMouseLeave("register");
                   }}
-                  className="mx-4 transition duration-400 ease-in-out transform hover:scale-110"
+                  className="no-underline mx-4 mt-2 transition duration-400 ease-in-out transform hover:scale-110"
                 >
-                  <NavLink
-                    to={"/clubs/register/"}
-                    className="no-underline"
-                    name="register"
-                    onClick={() => {
-                      setIsHovering({ ...isHovering, profile: false });
+                  <NoteAddIcon
+                    sx={{
+                      color: isHovering.register ? "#FFFFFF" : "gray",
+                      fontSize: "30",
                     }}
-                  >
-                    <NoteAddIcon
-                      sx={{
-                        color: isHovering.register ? "#FFFFFF" : "gray",
-                        fontSize: "30",
-                      }}
-                    />
-                    {isHovering.register && (
-                      <span className="ml-1 text-white font-bold">
-                        Register
-                      </span>
-                    )}
-                  </NavLink>
+                  />
+                  {isHovering.register && (
+                    <span className="ml-1 text-white font-bold">Register</span>
+                  )}
                 </Nav.Link>
               )}
               {isAuthorized ? (
                 <Nav.Link
+                  as={NavLink}
+                  to={"/logout"}
                   onMouseEnter={() => handleMouseEnter("logout")}
                   onMouseLeave={() => handleMouseLeave("logout")}
-                  className="mx-4 transition duration-400 ease-in-out transform hover:scale-110"
+                  className="no-underline mx-4 mt-2 transition duration-400 ease-in-out transform hover:scale-110"
                 >
-                  <NavLink to={"/logout"} className="no-underline">
-                    <LogoutIcon
-                      sx={{
-                        color: isHovering.logout ? "#FFFFFF" : "gray",
-                        fontSize: "30",
-                      }}
-                    />
-                    {isHovering.logout && (
-                      <span className="ml-1 text-white font-bold">Logout</span>
-                    )}
-                  </NavLink>
+                  <LogoutIcon
+                    sx={{
+                      color: isHovering.logout ? "#FFFFFF" : "gray",
+                      fontSize: "30",
+                    }}
+                  />
+                  {isHovering.logout && (
+                    <span className="ml-1 text-white font-bold">Logout</span>
+                  )}
                 </Nav.Link>
               ) : (
                 <Nav.Link
+                  as={NavLink}
+                  to={"/login"}
                   onMouseEnter={() => handleMouseEnter("login")}
                   onMouseLeave={() => handleMouseLeave("login")}
-                  className="mx-4 transition duration-400 ease-in-out transform hover:scale-110"
+                  className="no-underline mx-4 mt-2 transition duration-400 ease-in-out transform hover:scale-110"
                 >
-                  <NavLink to={"/login/"} className="no-underline">
-                    <LoginIcon
-                      sx={{
-                        color: isHovering.login ? "#FFFFFF" : "gray",
-                        fontSize: "30",
-                      }}
-                    />
-                    {isHovering.login && (
-                      <span className="ml-1  text-white font-bold">Login</span>
-                    )}
-                  </NavLink>
+                  <LoginIcon
+                    sx={{
+                      color: isHovering.login ? "#FFFFFF" : "gray",
+                      fontSize: "30",
+                    }}
+                  />
+                  {isHovering.login && (
+                    <span className="ml-1  text-white font-bold">Login</span>
+                  )}
                 </Nav.Link>
               )}
             </Nav>
