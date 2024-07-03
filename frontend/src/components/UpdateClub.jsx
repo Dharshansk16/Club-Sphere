@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import api from "../api";
 import Form from "./Form";
+import { urlToFile } from "../utils";
 
 const UpdateClub = () => {
   const { slug } = useParams();
@@ -13,20 +14,32 @@ const UpdateClub = () => {
     name: "",
     description: "",
     url: "",
-    avatar: "",
+    avatar: null,
   });
 
   useEffect(() => {
-    api
-      .get(`clubs/${slug}/`)
-      .then((response) => {
-        setClub(response.data);
-      })
-      .catch((error) => {
-        console.error("There was an error fetching the club data!", error);
+    const fetchClubDetais = async () => {
+      try {
+        const response = await api.get(`clubs/${slug}/`);
+        const file = await urlToFile(
+          response.data.avatar,
+          "image.jpg",
+          "image/jpeg"
+        );
+        setClub({
+          name: response.data.name,
+          description: response.data.description,
+          url: response.data.url,
+          avatar: file,
+        });
+      } catch (error) {
+        console.log("Error Occured while Fetching the ClubDetails", error);
         setErrorText(error);
-      });
+      }
+    };
+    fetchClubDetais();
   }, [slug]);
+
   // if club name is changed slug is changed so it is updated before being rendered
   //this ensures that slug is changed every time club name is changed
   useEffect(() => {
@@ -44,30 +57,28 @@ const UpdateClub = () => {
     setClub({ ...club, avatar: e.target.files[0] });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData();
-    for (const key in club) {
-      formData.append(key, club[key]);
-    }
-    api
-      .put(`clubs/${slug}/`, formData, {
+    try {
+      const formData = new FormData();
+      for (const key in club) {
+        formData.append(key, club[key]);
+      }
+      const response = await api.put(`clubs/${slug}/`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
-      })
-      .then((response) => {
-        console.log("Club updated successfully!", response.data);
-        if (response.data.slug !== slug) {
-          setNewSlug(response.data.slug);
-        } else {
-          navigate(`/clubs/${slug}`);
-        }
-      })
-      .catch((error) => {
-        console.error("There was an error updating the club!", error);
-        setErrorText("There was an Error Updating the Club!");
       });
+      console.log("Club Updated Successfully!");
+      if (response.data.slug !== slug) {
+        setNewSlug(response.data.slug);
+      } else {
+        navigate(`/clubs/${slug}`);
+      }
+    } catch (error) {
+      console.log("There was an Error Updating the Club", error);
+      setErrorText("There was an Error Updating the Club");
+    }
   };
 
   return (

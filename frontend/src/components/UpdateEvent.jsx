@@ -3,6 +3,7 @@ import api from "../api";
 import { useAuth } from "../AuthContext";
 import EventForm from "./EventForm";
 import { useParams, useNavigate } from "react-router-dom";
+import { urlToFile } from "../utils";
 
 const UpdateEvent = () => {
   const { id } = useParams();
@@ -16,23 +17,28 @@ const UpdateEvent = () => {
     img: null,
     link: "",
   });
-
   useEffect(() => {
     const fetchEvent = async () => {
       try {
         const response = await api.get(`/events/${id}/`);
-
-        // Format date before setting in state
+        console.log(response.data);
+        // Format date
         const formattedDate = new Date(response.data.date)
           .toISOString()
-          .slice(0, 16); // Adjust format as needed
+          .slice(0, 16);
+
+        const file = await urlToFile(
+          response.data.img,
+          "image.jpg",
+          "image/jpeg"
+        );
 
         setFormData({
           name: response.data.name,
           description: response.data.description,
           date: formattedDate,
           venue: response.data.venue,
-          img: response.data.img !== null ? response.data.img : null,
+          img: file,
           link: response.data.link,
         });
         console.log(formData);
@@ -53,6 +59,7 @@ const UpdateEvent = () => {
       };
 
       const data = new FormData();
+      console.log(formDataWithClub);
       for (const key in formDataWithClub) {
         if (formDataWithClub[key] !== null) {
           data.append(key, formDataWithClub[key]);
@@ -74,7 +81,8 @@ const UpdateEvent = () => {
 
   const handleChange = (e) => {
     if (e.target.name === "img") {
-      setFormData({ ...formData, img: e.target.files[0] }); // For handling file upload
+      setFormData({ ...formData, img: e.target.files[0] });
+      console.log(e.target.files[0]); // For handling image upload
     } else {
       setFormData({ ...formData, [e.target.name]: e.target.value });
     }

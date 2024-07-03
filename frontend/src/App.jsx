@@ -51,8 +51,22 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route path="/events/add/" element={<AddEvent />} />
-          <Route path="/events/update/:id" element={<UpdateEvent />} />
+          <Route
+            path="/events/add/"
+            element={
+              <ProtectedRoute>
+                <AddEvent />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/events/update/:id"
+            element={
+              <ProtectedRoute>
+                <UpdateEvent />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </Router>
     </AuthProvider>
