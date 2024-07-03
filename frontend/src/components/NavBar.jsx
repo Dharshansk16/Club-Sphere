@@ -102,11 +102,12 @@ const NavBar = ({ onSearchSubmit }) => {
           left: 0,
           width: "100%",
           zIndex: 1100,
+          backgroundColor: "rgba(0, 0, 0, 0.1)",
         }}
       >
         <Container fluid>
           <Navbar.Brand className="transition duration-300 ease-in-out transform hover:scale-110">
-            <NavLink to={"/"} className="no-underline">
+            <NavLink to={"/"} className="no-underline ml-8">
               <PanoramaPhotosphereIcon
                 sx={{
                   fontSize: 50,
@@ -124,7 +125,7 @@ const NavBar = ({ onSearchSubmit }) => {
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbar-nav" />
           <Navbar.Collapse id="navbar-nav">
-            <Nav className="pb-1 me-auto">
+            <Nav className="pb-1 me-auto ml-auto">
               <Nav.Link
                 as={NavLink}
                 to="/"
