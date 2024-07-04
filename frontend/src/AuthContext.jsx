@@ -85,6 +85,7 @@ export const AuthProvider = ({ children }) => {
       user: userData,
     });
     navigate("/", { replace: true });
+    window.location.reload();
   };
 
   const logout = () => {

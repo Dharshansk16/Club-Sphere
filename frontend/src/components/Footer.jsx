@@ -32,6 +32,7 @@ const Footer = () => {
       ref={footerRef}
       className={`bg-zinc-900 text-white py-8 ${isVisible ? "fade-in" : ""}`}
     >
+      <div className="mt-16"></div>
       <div className="container mx-auto flex flex-col md:flex-row justify-between items-center px-4">
         <div className="mb-8 md:mb-0 text-center md:text-left">
           <PanoramaPhotosphereIcon
@@ -89,7 +90,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <div className="bg-gray-800 py-2">
+      <div className="bg-zinc-700 py-2">
         <marquee
           className="text-white text-md font-bold"
           behavior="scroll"
