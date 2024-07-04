@@ -52,8 +52,8 @@ Welcome to **ClubSphere**, a full-featured platform for managing clubs and event
 ### Backend Setup
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/clubsphere.git
-   cd clubsphere
+   git clone https://github.com/Dharshansk16/Club-Sphere.git
+   cd ClubSphere
    
 2. Set up a virtual environment:
    ```bash
