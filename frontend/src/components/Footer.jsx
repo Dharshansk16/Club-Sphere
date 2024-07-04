@@ -50,7 +50,7 @@ const Footer = () => {
         </div>
         <div className="flex flex-col md:flex-row text-center md:text-left">
           <div className="mb-8 md:mb-0 md:mr-16">
-            <h3 className="text-lg font-semibold mb-2">Contact Info</h3>
+            <h3 className="text-lg font-semibold mb-2 mr-4">Contact Info</h3>
             <p className="text-sm opacity-80">
               Email:
               <a
@@ -60,7 +60,7 @@ const Footer = () => {
                 dcodecraft@gmail.com
               </a>
             </p>
-            <div className="mt-4 flex items-center justify-center md:justify-start">
+            <div className="mt-4 ml-6 flex items-center justify-center md:justify-start">
               <a
                 className="mx-2"
                 href="https://github.com/Dharshansk16"
