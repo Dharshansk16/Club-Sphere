@@ -11,7 +11,7 @@ Welcome to **ClubSphere**, a full-featured platform for managing clubs and event
 - [Usage](#usage)
 - [Screenshots](#screenshots)
 - [Authentication](#authentication)
-- [Search Functionality](#search-functionality)
+- [Search Functionality](#search-functionality) 
 - [Contributing](#contributing)
 
 
