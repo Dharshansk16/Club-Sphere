@@ -1,5 +1,5 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
-import { jwtDecode } from "jwt-decode";
+import jwtDecode from "jwt-decode";
 import api from "./api";
 import { REFRESH_TOKEN, ACCESS_TOKEN } from "./constants";
 import { useNavigate } from "react-router-dom";
@@ -27,13 +27,13 @@ export const AuthProvider = ({ children }) => {
       if (res.status === 200) {
         const accessToken = res.data.access;
         localStorage.setItem(ACCESS_TOKEN, accessToken);
-        await fetchCurrentUser(accessToken);
+        return accessToken;
       } else {
-        setAuthState({ isAuthorized: false, user: null });
+        throw new Error("Failed to refresh token");
       }
     } catch (error) {
-      console.log(error);
-      setAuthState({ isAuthorized: false, user: null });
+      console.log("Error refreshing token:", error);
+      throw error;
     }
   };
 
@@ -49,11 +49,8 @@ export const AuthProvider = ({ children }) => {
         user: response.data,
       });
     } catch (error) {
-      console.log(error);
-      setAuthState({
-        isAuthorized: false,
-        user: null,
-      });
+      console.log("Error fetching current user:", error);
+      throw error;
     }
   };
 
@@ -70,7 +67,13 @@ export const AuthProvider = ({ children }) => {
     const now = Date.now() / 1000;
 
     if (tokenExpiration < now) {
-      await refreshToken();
+      try {
+        const accessToken = await refreshToken();
+        await fetchCurrentUser(accessToken);
+      } catch (error) {
+        console.log("Error in auth:", error);
+        setAuthState({ isAuthorized: false, user: null });
+      }
     } else {
       await fetchCurrentUser(token);
     }
@@ -82,7 +85,6 @@ export const AuthProvider = ({ children }) => {
       user: userData,
     });
     navigate("/", { replace: true });
-    window.location.reload();
   };
 
   const logout = () => {

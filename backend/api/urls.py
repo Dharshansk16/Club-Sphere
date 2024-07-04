@@ -2,6 +2,7 @@ from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView, TokenVerifyView
 from .views import ClubViewSet, EventViewSet , UserViewSet
+from django.contrib import admin
 
 # Automatically Routes all the urls
 router = DefaultRouter()
