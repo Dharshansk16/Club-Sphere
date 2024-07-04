@@ -89,6 +89,21 @@ const Footer = () => {
           </div>
         </div>
       </div>
+      <div className="bg-gray-800 py-2">
+        <marquee
+          className="text-white text-md font-bold"
+          behavior="scroll"
+          direction="left"
+        >
+          For club registration inquiries, please contact via email at
+          <a
+            href="mailto:dcodecraft@gmail.com"
+            className="text-blue-400 hover:underline"
+          >
+            dcodecraft@gmail.com
+          </a>
+        </marquee>
+      </div>
     </footer>
   );
 };
