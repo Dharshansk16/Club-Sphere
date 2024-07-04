@@ -15,9 +15,7 @@ Welcome to **ClubSphere**, a full-featured platform for managing clubs and event
 - [Contributing](#contributing)
 
 ## Demo
-[Watch the demo video here](
-
-https://github.com/Dharshansk16/Club-Sphere/assets/142658700/d14c733b-490b-4151-a82a-568fe513a57a)
+![Watch the demo video here](#https://github.com/Dharshansk16/Club-Sphere/assets/142658700/d14c733b-490b-4151-a82a-568fe513a57a)
 
 ## Project Overview
 **ClubSphere** is designed to streamline the communication between club owners and students, making it easier to disseminate information about events. Club owners can register their clubs on the platform and add details about upcoming events, including the date, venue, and a registration link. Students can effortlessly view and register for events, ensuring they never miss out. The platform also features a robust search functionality that allows students to sort events based on their favorite clubs.
