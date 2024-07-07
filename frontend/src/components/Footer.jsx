@@ -96,7 +96,7 @@ const Footer = () => {
           behavior="scroll"
           direction="left"
         >
-          For club registration inquiries, please contact via email at
+          For club registration inquiries, please contact via email at {""}
           <a
             href="mailto:dcodecraft@gmail.com"
             className="text-blue-400 hover:underline"
