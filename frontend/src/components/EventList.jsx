@@ -53,25 +53,57 @@ const EventList = ({ searchQuery }) => {
     return <div>Loading...</div>;
   }
 
+  //layout improvise
+  const fullRows = Math.floor(filteredEvents.length / 3);
+  const rows = [];
+
+  for (let i = 0; i < fullRows * 3; i += 3) {
+    rows.push(filteredEvents.slice(i, i + 3));
+  }
+
+  const lastRow = filteredEvents.slice(fullRows * 3);
+
   return (
     <div className="container mt-4">
-      <Row xs={1} md={2} lg={3} className="justify-between">
-        {filteredEvents.map((event, index) => (
-          <Col key={event.id} className="p-2 mb-16">
-            <EventCard
-              image={event.img}
-              name={event.name}
-              description={event.description}
-              clubname={event.club.name}
-              date={event.date}
-              venue={event.venue}
-              slug={event.club.slug}
-              link={event.link}
-              id={event.id}
-            />
-          </Col>
-        ))}
-      </Row>
+      {rows.map((row, rowIndex) => (
+        <Row key={rowIndex} xs={1} md={2} lg={3} className="g-4">
+          {row.map((event) => (
+            <Col key={event.id} className="p-2 mb-16">
+              <EventCard
+                image={event.img}
+                name={event.name}
+                description={event.description}
+                clubname={event.club.name}
+                date={event.date}
+                venue={event.venue}
+                slug={event.club.slug}
+                link={event.link}
+                id={event.id}
+              />
+            </Col>
+          ))}
+        </Row>
+      ))}
+
+      {lastRow.length > 0 && (
+        <Row className="g-4 justify-content-center">
+          {lastRow.map((event) => (
+            <Col key={event.id} md={4} className="p-2 mb-16">
+              <EventCard
+                image={event.img}
+                name={event.name}
+                description={event.description}
+                clubname={event.club.name}
+                date={event.date}
+                venue={event.venue}
+                slug={event.club.slug}
+                link={event.link}
+                id={event.id}
+              />
+            </Col>
+          ))}
+        </Row>
+      )}
     </div>
   );
 };
